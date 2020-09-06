@@ -1,0 +1,23 @@
+{
+  "name": "coders-website",
+  "version": "1.0.0",
+  "description": "Both frontend and backend",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd Frontend && npm run dev",
+    "server": "cd Backend && node app.js",
+    "server-dev": "cd Backend && nodemon app.js",
+    "client-install": "cd Frontend && npm install",
+    "server-install": "cd Backend && npm install",
+
+    "start": "concurrently \"npm run client\" \"npm run server\"",
+    "dev": "concurrently \"npm run client\" \"npm run server-dev\"",
+    "postinstall": "concurrently \"npm run client-install\" \"npm run server-install\"",
+    "heroku-postbuild":"cd Frontend && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
