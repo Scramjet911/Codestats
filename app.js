@@ -1,4 +1,4 @@
-require('dotenv').config({path:__dirname+'/./../.env'});
+require('dotenv').config({path:__dirname+'/.env'});
 
 const mongoose = require('mongoose');
 const express=require('express');
@@ -9,6 +9,17 @@ const cors = require('cors');
 const webpush = require('web-push');
 const Agenda = require('agenda');
 const http = require('http').Server(app);
+// const http = require('http');
+const {parse} = require('url');
+
+// let httpServer;
+
+const next = require('next');
+const dev = process.env.NODE_ENV !== 'production';
+const nextapp = next({dev});
+const nexthandle = nextapp.getRequestHandler();
+
+
 const io = require('socket.io')(http);
 
 // Routes
@@ -22,7 +33,6 @@ const resourceRoutes =require("./routes/resources");
 const chatRoutes = require("./routes/chat");
 const { initSocket } = require('./controllers/chat');
 const discussionRoutes=require("./routes/discussion")
-
 
 // Webpush initialize with keys
 webpush.setVapidDetails('mailto:massmenon@gmail.com',process.env.publicKey,process.env.privateKey);     
@@ -77,9 +87,21 @@ app.use("/api",resourceRoutes);
 app.use("/api/chat",chatRoutes);
 app.use("/api",discussionRoutes);
 
+nextapp.prepare().then(()=>{
+    app.get('/*',(req, res)=>{
+        const parsedUrl = parse(req.url, true);
+        // const {pathname, query} = parsedUrl;
+        // console.log(req.url);
+        // nextapp.render(req,res,req.url);
+            // console.log(pathname);
+        
+        // else{
+            nexthandle(req,res,parsedUrl);
+        // }
+    });
+});
 
-const port = 8000;
-
+const port = process.env.PORT || 8000;
 
 http.listen(port,()=>{
     console.log(`http :${port}`);

@@ -1,23 +1,61 @@
 {
-  "name": "coders-website",
+  "name": "codestats-backend",
   "version": "1.0.0",
-  "description": "Both frontend and backend",
-  "main": "index.js",
+  "description": "The Codestats website",
+  "main": "app.js",
   "scripts": {
-    "client": "cd Frontend && npm run dev",
-    "server": "cd Backend && node app.js",
-    "server-dev": "cd Backend && nodemon app.js",
-    "client-install": "cd Frontend && npm install",
-    "server-install": "cd Backend && npm install",
-
-    "start": "concurrently \"npm run client\" \"npm run server\"",
-    "dev": "concurrently \"npm run client\" \"npm run server-dev\"",
-    "postinstall": "concurrently \"npm run client-install\" \"npm run server-install\"",
-    "heroku-postbuild":"cd Frontend && npm run build"
+    "start": "node app.js",
+    "dev": "set NODE_ENV=development&& nodemon app.js",
+    "dev-lnx": "NODE_ENV=development&& nodemon app.js",
+    "build": "next build",
+    "heroku-postbuild": "next build",
+    "front": "next start -p 8000",
+    "front-dev": "next dev -p 8000"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scramjet911/coders-website.git"
+  },
+  "keywords": [
+    "coders-companion"
+  ],
+  "author": "Scramjet911, ajaykpv, navaneethmanoj, Riswanatr",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Scramjet911/coders-website/issues"
+  },
+  "homepage": "https://github.com/Scramjet911/coders-website#readme",
   "dependencies": {
-    "concurrently": "^5.3.0"
+    "agenda": "^3.1.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "express-validator": "^6.6.1",
+    "formidable": "^1.2.2",
+    "http": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.19",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.26",
+    "nodemailer": "^6.4.11",
+    "nodemon": "^2.0.4",
+    "socket.io": "^2.3.0",
+    "socketio-jwt": "^4.6.2",
+    "uuid": "^8.3.0",
+    "web-push": "^3.4.4",
+    "bootstrap": "^4.5.2",
+    "next": "9.5.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "16.13.1",
+    "react-hook-form": "^6.7.2",
+    "react-live-clock": "^4.0.5",
+    "react-modal": "^3.11.2",
+    "react-router-dom": "^5.2.0",
+    "sass": "^1.26.10",
+    "socket.io-client": "^2.3.0"
   }
 }

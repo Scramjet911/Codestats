@@ -7,13 +7,12 @@
 import styles from './chat.module.scss'
 import { Component, createRef } from 'react'
 import socketio from 'socket.io-client'
+import {showLogin} from '../top'
+import ReactDOM from 'react-dom'
 
-
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjNhMDZkZDJlNGJlYzM5NDg2ZWJiYjgiLCJpYXQiOjE1OTc3NjAxMTF9.iD0oZCMwRLkLYg8uWIHfpQqW_Nc8FQoOgq2fm3lDFRo';
-const username = 'ajay999';
-const websocketurl = 'ws://localhost:8000';
-const chaturl = "http://localhost:8000/api/chat/";
-let popupTimeoutId = null;
+let localval, token, username, popupTimeoutId;
+const websocketurl = '//codestats-test.herokuapp.com/';
+const chaturl = "//codestats-test.herokuapp.com/api/chat/";
 
 function getReciever(chatroom){
     return (chatroom.user1==username)?chatroom.user2:chatroom.user1;
@@ -28,6 +27,7 @@ class Chat extends Component{
     }
 
     state = {
+        isLoggedIn : false,
         isChatMinimized : true,
         isMainWindow : true,
         isSearch : false,
@@ -39,54 +39,117 @@ class Chat extends Component{
         currentChat : ''
     };
 
-    componentDidMount(){
-        let socket = socketio(websocketurl,{
-            query:{token:token}
-            });
-        this.setState({socket : socket});
-        // console.log(socket);
-        
-        socket.on('connect',()=>{
-            // console.log('Connected',socket);
-            socket.emit('joinUser',username);
-        });
-        fetch(chaturl + username,{
-            method:'GET',headers:{'Authorization':'Bearer '+ token}
-        })
-        .then(data => data.json())
-        .then(userlist =>{
-            // console.log(userlist);
-            this.setState({userList:userlist});
-        })
-        .catch(err=>console.log(err));
+    chatSignIn(){
+        let storeval = localStorage.getItem('jwt');
+        if(storeval == null){
+            this.setState({isLoggedIn : false});
+            this.setState({socket:null});
+            this.setState({isMainWindow:true});
+        }
+        else{
+            localval = JSON.parse(storeval);
+            token = localval.token;
+            username = localval.user.username;
+            popupTimeoutId = null;
 
-/*  When a new message is recieved, if currentChat is same as sender of message, change messageList state
-    which calls render() again showing new messages.
- */
-        socket.on('newMessage',data=>{
-            if(data.sender==this.state.currentChat){
-                this.setState({messageList:[...this.state.messageList,data]});
-            }
-        });
+            let socket = socketio(websocketurl,{
+                query:{token:token}
+                });
+            this.setState({socket : socket});
+            console.log(token, username);
+            
+            socket.on('connect',()=>{
+                // console.log('Connected',socket);
+                socket.emit('joinUser',username);
+            });
+            fetch(chaturl + username,{
+                method:'GET',headers:{'Authorization':'Bearer '+ token}
+            })
+            .then(data => data.json())
+            .then(userlist =>{
+                // console.log(userlist);
+                this.setState({userList:userlist});
+                this.setState({isLoggedIn : true});
+            })
+            .catch(err=>console.log(err));
+
+    /*  When a new message is recieved, if currentChat is same as sender of message, change messageList state
+        which calls render() again showing new messages.
+    */
+            socket.on('newMessage',data=>{
+                if(data.sender==this.state.currentChat){
+                    this.setState({messageList:[...this.state.messageList,data]});
+                }
+            });
+        }
+    }
+    componentDidMount(){
         // console.log(this.chatContainer);
+        this.chatSignIn();
+        /* Add click listener */
+        document.addEventListener('mousedown',this.handleClickOutside);
     }
 
     componentWillUnmount(){
-        this.state.socket.off('connect');
-        this.state.socket.off('newMessage');
+        if(this.state.socket!=null){
+            this.state.socket.off('connect');
+            this.state.socket.off('newMessage');
+        }
+        document.removeEventListener('mousedown',this.handleClickOutside);
     }
+
     componentDidUpdate(){
         if(this.state.isMainWindow == false){
             this.chatContainer.current.scrollIntoView();
         }
+        let localval = JSON.parse(localStorage.getItem('jwt'));
+        if(this.state.isLoggedIn == true){
+            if(localval && localval.user.username != username){
+                if(this.state.socket!=null){
+                    this.state.socket.off('connect');
+                    this.state.socket.off('newMessage');
+                    this.setState({socket:null});
+                    this.setState({isMainWindow:true});
+                }
+                this.chatSignIn();
+            }
+            else if(localval==null){
+                this.setState({isMainWindow:true});
+                this.setState({isLoggedIn:false});
+            }
+        }
+        else if(this.isLoggedIn==false){
+            if(this.state.socket!=null){
+                this.state.socket.off('connect');
+                this.state.socket.off('newMessage');
+                this.setState({socket:null});
+                this.setState({isMainWindow:true});
+            }
+        }
         // console.log("component update", this.chatContainer);
     }
 
+    handleClickOutside = (event)=>{
+        const domNode = ReactDOM.findDOMNode(this);
+        if(!domNode || !domNode.contains(event.target)){
+            this.setState({isChatMinimized:true});
+        }
+    }
     onClickMinimize = ()=>{
+        let storeval = localStorage.getItem('jwt');
+        if(storeval == null){
+            this.setState({isLoggedIn : false});
+            this.setState({socket : null});
+        }
+        else{
+            this.setState({isLoggedIn : true});
+        }
+
         this.setState({isChatMinimized : !this.state.isChatMinimized});
     };
 
     onClickBack = ()=>{
+        this.messageText.current.value = "";
         this.setState({isMainWindow:!this.state.isMainWindow});
     };
 
@@ -126,7 +189,18 @@ class Chat extends Component{
     showUserList(){
         // console.log(this.state.userlist);
         let userlist;
-        if(this.state.isSearch==true){
+        if(this.state.isLoggedIn == false){
+            return (
+                <button
+                    className={`${this.state.isChatMinimized ? styles['btn-disable'] : styles["login-btn"]}`}
+                    onClick={()=>{
+                        showLogin();
+                        this.setState({isChatMinimized:true});
+                        }}
+                >LOGIN</button>
+            )
+        }
+        else if(this.state.isSearch==true){
             userlist = this.state.searchList;
         }
         else{
@@ -273,7 +347,7 @@ class Chat extends Component{
     }
 
     render() {
-        const {isChatMinimized, isMainWindow, showPopup} = this.state;
+        const {isChatMinimized, isMainWindow, showPopup, isLoggedIn} = this.state;
         return (
 
             <div className={`${styles['window']} ${isChatMinimized ? styles['minimized']:""}`}>
@@ -294,11 +368,11 @@ class Chat extends Component{
                 
                 {/* Main Window with user List */}
                 <aside className={`${styles['window-sidebar']} ${isMainWindow ? "":styles['disable']}`} >
-                    <div className={styles["input-group"]}>
+                    <div className={`${isLoggedIn ? styles["input-group"] : styles['disable']}`}>
                         <input 
                             ref={this.searchText}
                             type="text" 
-                            className={styles["form-control"]}
+                            className={`${isLoggedIn ? styles["form-control"] : styles['disable']}`}
                             placeholder="Search Users"
                             onKeyUp={this.searchUser}
                         />
@@ -309,7 +383,7 @@ class Chat extends Component{
                     </div>
                     {this.showUserList()}
                     <button 
-                        className={styles['send-message']}
+                        className={`${(isChatMinimized || !isLoggedIn) ? styles['btn-disable'] : styles['send-message']}`}
                         onClick={this.startNewChat}
                         >
                         <i className={`${styles['add-chat-icon']} fas fa-plus`}></i>
@@ -317,7 +391,7 @@ class Chat extends Component{
                 </aside>
 
                 {/* Window with Chat Content */}
-                <section className={styles['window-content']}>
+                <section className={`${(isChatMinimized || !isLoggedIn) ? styles['disable'] : styles['window-content']}`}>
                     <div className={styles['top-wrapper']}>{this.state.currentChat}</div>
                     {this.showUserChat()}
                     <div className={styles['bottom-wrapper']}>
