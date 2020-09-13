@@ -4,18 +4,21 @@ const moment = require('moment');                                               
 /* Getting Monthly Events For Calender */
 exports.getEvent = (req, res)=>{
     let currdate = moment();
-    let queryDateMin = moment([currdate.year(),currdate.month(), 1]),
-        queryDateMax = moment(queryDateMin).endOf('month');
+    let queryDateMin = currdate,
+        queryDateMax = moment(currdate).add(1,'month');
+    // let queryDateMin = moment([currdate.year(),currdate.month(), 1]),
+    //     queryDateMax = moment(queryDateMin).endOf('month');
 
     if(req.query.page && parseInt(req.query.page)>1){                           // To get different Month Events
         queryDateMin.add(parseInt(req.query.page)-1,'month');
-        queryDateMax = moment(queryDateMin).endOf('month');
+        queryDateMax = moment(queryDateMin).add(1,'month');
+        // queryDateMax = moment(queryDateMin).endOf('month');
     }
 
     Events.find({"date" : {$gte : queryDateMin, $lte : queryDateMax}},(err,events)=>{
         if(err){
             console.log("Database Error",err);
-            res.status(500).send("Error");
+            res.status(500).json({error:"Server Error"});
         }
         else{
             res.status(201).json(events);

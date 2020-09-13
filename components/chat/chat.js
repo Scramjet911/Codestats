@@ -7,12 +7,12 @@
 import styles from './chat.module.scss'
 import { Component, createRef } from 'react'
 import socketio from 'socket.io-client'
-import {showLogin} from '../top'
+import {showLogin} from '../Top/navbar'
 import ReactDOM from 'react-dom'
 
 let localval, token, username, popupTimeoutId;
-const websocketurl = '//codestats-test.herokuapp.com/';
-const chaturl = "//codestats-test.herokuapp.com/api/chat/";
+const websocketurl = (process.env.NODE_ENV==="production")?'//codestats-test.herokuapp.com/':"http://localhost:8000/";
+const chaturl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/chat/":"http://localhost:8000/api/chat/";
 
 function getReciever(chatroom){
     return (chatroom.user1==username)?chatroom.user2:chatroom.user1;

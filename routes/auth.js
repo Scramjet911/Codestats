@@ -7,21 +7,21 @@ router.post("/signup",[
     check("username","username should be 3 characters")
     .isLength({min:3}),
     check("name","name is required")
-    .isLength({ min: 1 }),
+    .notEmpty(),
     check("email","email is required")
     .isEmail(),
     check("password","password should be 4 characters")
     .isLength({ min: 4 }),
-    check("occupation","occupation is required")
-    .isIn(['student','professional','other']),
-    check("institution","institution is required")
-    .isLength({min:1})
+    // check("occupation","occupation is required")
+    // .isIn(['student','professional','other']),
+    // check("institution","institution is required")
+    // .isLength({min:1})
     //check("prog_lang","programming language required").isLength({min:1}),
     
 ],
 signup 
 );
-router.post("/confirmation/:token",confirmationPost)
+router.get("/confirmation/:token",confirmationPost)
 router.post("/signin",[
     check("email","email is required")
     .isEmail(),

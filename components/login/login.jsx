@@ -1,9 +1,7 @@
 import React from "react";
-import { Register } from "./register.jsx";
-import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import { useState } from "react";
-import {hideLogin} from '../top'
+import {hideLogin} from '../Top/navbar'
 
 import { login, authenticate, isAuthenticated } from "../auth/index";
 
@@ -122,7 +120,7 @@ function Login(props) {
 				<div className="auth-inner">
 					{values.isActive ? (
 						<div>
-							<form>
+							<form onSubmit={onSubmit}>
 								<h3 className="title">Log In</h3>
 								<div className="form-group"></div>
 								<div className="login-input-pos">
@@ -162,7 +160,6 @@ function Login(props) {
 									<div className="form-group forgot-password text-right login-pos">
 										<button
 											type="submit"
-											onClick={onSubmit}
 											className="btn btn-primary btn-block"
 										>
 											Log In

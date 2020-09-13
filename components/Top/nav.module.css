@@ -1,0 +1,109 @@
+.topnav {
+    overflow: hidden;
+    background-color:rgba(7, 15, 31, 0.767);
+    height: 80px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode',
+    'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  .clock{
+    position:absolute;
+    top:55px;
+    left:115px;
+    color:rgba(223, 214, 97, 0.938);
+    font-size: 18px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  .topnav a {
+    float: right;
+    display: block;
+    color: #6b6969;
+    text-align: center;
+    padding: 25px 16px 15px 15px;
+    text-decoration: none;
+    font-size: 17px;
+    height:100%;
+
+  }
+  
+  .topnav a:hover {
+    color: #5bcbfff6;
+    background-color:rgba(8, 37, 94, 0.425);
+    
+  }
+  
+  .topnav a.active {
+    background-color: #4e524f;
+    color: white;
+  }
+  .topnav a.active:hover{
+    background-color:rgba(8, 37, 94, 0.425);
+    color: #5bcbfff6;
+    
+
+  }
+  .topnav .icon {
+    display: none;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav div:not(:first-child) {display: none;}
+    .topnav div.icon {
+      float: right;
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+  .dropdown {
+    display: inline-block;
+  }
+  
+  .dropdown_content {
+    display: none;
+    position: absolute;
+    background: #5653f3;
+    color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  .dropdown_content div{
+    float: right;
+    display: block;
+    color: #f5efef;
+    text-align: center;
+    padding: 10px 16px 15px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    height:100%;
+  }
+  
+  .dropdown:hover .dropdown_content {
+    display: block;
+  }
+  @media screen and (max-width: 600px) {
+    .dropdown_content a{
+      display: block;
+      text-align: center;
+      padding: 10px 5px 5px 0px;
+      text-decoration: none;
+      font-size: 17px;
+      height:50%;
+    }
+    .dropdown_content{
+      left:-10px;
+    }
+  }

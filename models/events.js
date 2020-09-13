@@ -32,7 +32,7 @@ var eventSchema = new mongoose.Schema({
 }
 );
 var eventsReviewSchema = eventSchema.clone();
-eventSchema.add(
+eventsReviewSchema.add(
     {
         userId : {
             type : mongoose.Schema.ObjectId,

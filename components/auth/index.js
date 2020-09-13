@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import Router,{useRouter} from 'next/router';
-const API = "//codestats-test.herokuapp.com/api";
+const API = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api":"http://localhost:8000/api";
 
 export const login =user =>{
     return fetch(`${API}/signin`,{

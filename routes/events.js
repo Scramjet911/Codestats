@@ -8,7 +8,7 @@ const { getUserById } = require('../controllers/user');
 
 const eventValidate = ()=>{
     return [
-        check("userId","User Id is required").exists(),
+        // check("userId","User Id is required").exists(),
         check("title","Title is required").exists(),
         check("location","Location is required").exists(),
         check("date","Date is required").exists(),

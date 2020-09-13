@@ -1,0 +1,59 @@
+/*settings*/
+.mnav {
+    margin-top:20px;
+    padding:3rem;
+    background-color: rgb(7, 15, 31);
+  }
+  .mset {
+    margin-left: 200px;
+  }
+  .img-thumb {
+    width: 100px;
+    height: auto;
+    float: left;
+  }
+  /* image upload*/
+.img001 {
+    border: 0;
+    cursor: pointer;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+  }
+  .image_size4{
+    position: absolute;
+    top:1px;
+    right: 1px;
+    left:1px;
+    width:180px;
+    height: 180px;
+    border-radius:90px;
+    
+  }
+  .avatar{
+    position:relative;
+    width:70px;
+    height: 70px;
+    top:15px;
+    background-image: linear-gradient(to bottom, rgb(7, 233, 233), rgb(7, 22, 88)) ;
+    border-radius:50px;
+    text-align: center;
+  }
+  .image_upload > input
+  {
+      display: none;
+  }
+  
+  .image_upload 
+  {  
+      position: relative;
+      top:-20px;
+      left:30px;
+      width: 80px;
+      cursor: pointer ;
+  }
+  .fa-camera{
+    cursor: pointer ;
+    color: #6f797a;
+    
+  }

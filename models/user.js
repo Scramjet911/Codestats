@@ -55,11 +55,9 @@ var userSchema = new mongoose.Schema({
     },
     occupation:{
         type:String,
-        required:true
     },
     institution:{
         type:String,
-        required:true
     },
     designation:{
         type:String
