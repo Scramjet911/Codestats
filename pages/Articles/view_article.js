@@ -4,7 +4,62 @@ import Navbar from "../../components/Top/navbar";
 import Write from "../../components/Write";
 import styles from "./article.module.css";
 import LikeButton from "../../components/like";
+
+import { useEffect, useState } from "react";
+import { isAuthenticated } from "../../components/auth";
+const API = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api":"http://localhost:8000/api";
+
 export default function ViewArticle() {
+    let id=""
+    const[article,setarticle]=useState([]);
+    const[comment,setcomment]=useState("");
+    if (typeof window != "undefined"){
+    let queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const qid = urlParams.get('id')
+
+        id=qid
+    console.log(id)
+
+    } 
+    useEffect(()=>{
+        fetch(`${API}/article/${id}`,{
+            method:"GET"}).then(
+               
+                res => res.json()).then(data=>{
+                  setarticle(data)
+                  console.log(data)
+                }
+                
+        
+            )
+            .catch(err=>console.log(err));
+          
+        },[])
+        const handleChange = (event) => {
+                setcomment( event.target.value);
+            }
+        const commentpost=(event)=>{
+            event.preventDefault()
+            const {user,token}=isAuthenticated()
+            fetch(`${API}/article/addcomment/${user._id}/${id}`,{
+                method:"POST",
+                headers:{
+                    Accept:"application/json",
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body:JSON.stringify({
+                    "body":`${comment}`
+                })
+            }).then(resposnse =>{
+                setcomment("")
+                return resposnse.json();
+            })
+            .catch(err=>console.log(err));
+    
+        }
+
     return (
         <div>
             <Head>
@@ -27,23 +82,29 @@ export default function ViewArticle() {
             <Navbar />
 
             <div id="row">
-                <div className={styles.article_body}>
-                    <div className={styles.date}>dd/mm/yyyy</div>
+               {article &&( <div className={styles.article_body}>
+                    <div className={styles.date}>{new Date(article.createdAt).toDateString()}</div>
+
                     <div className={styles.bookmark}>
                         <button>
                             {" "}
                             <i class="fas fa-bookmark"></i>
                         </button>
                     </div>
-                    <div className="title">Article title</div>
+                    <div className="title">{article.title}</div>
+
                     <div className={styles.avatar}>
                         <img src="/images/avatar.png" className="image-size1" />
                     </div>
                     <div className={styles.details2}>
-                        <div className={styles.username}>@username</div>
-                        <div className={styles.category}>category:</div>
+
+                    <div className={styles.username}>@{article.author &&(<span>{article.author.username}</span>)} </div>
+                        <div className={styles.category}>category:{article.category && article.category.map(item=>{
+                                    return item.name
+                                })}</div>
                     </div>
-                    <div className={styles.article_content}>content:</div>
+                    <div className={styles.article_content}>{article.body}</div>
+
                     <div className={styles.hl} />
                     <div className="row">
                         <div className={styles.reaction}>
@@ -59,7 +120,14 @@ export default function ViewArticle() {
                         <textarea
                             className={styles.control}
                             placeholder="Comment here....."
+
+                            onChange={handleChange}
+                            value={comment}
                         />
+                        <div>
+                        <button type="button" class="btn btn-primary" onClick={commentpost}>post</button>
+                        </div>
+
                         Comment List:
                         <div id="row">
                             <div className={styles.username}>@username1</div>
@@ -95,7 +163,9 @@ export default function ViewArticle() {
                             </div>
                         </div>
                     </div>
-                </div>
+
+                </div>)}
+
             </div>
         </div>
     );

@@ -35,6 +35,19 @@ exports.getCommentById = (req,res,next,id) =>{
         next();
     })
 };
+exports.getOneArticle = (req,res) =>{
+    Article.findById(req.article._id)
+    .populate("author",'username')
+    .populate("category",'name')
+    .exec((err,article)=>{
+        if(err){ 
+            return res.status(400).json({
+                error:"Article not found"
+            });
+        }
+        res.json(article)
+    })
+};
 
 exports.createArticle = (req,res) =>{   
 
@@ -189,8 +202,9 @@ exports.getAllArticle =(req,res) =>{
     let limit=req.query.limit?parseInt(req.query.limit) :8
     let sortBy=req.query.sortBy?req.query.sortBy :"createdAt"
     Article.find()
-   // .populate("author",'username')
-    .sort([[sortBy,"asc"]])
+    .populate("author",'username')
+    .populate("category",'name')
+    .sort([[sortBy,"desc"]])
     .limit(limit)
     .exec((err,articles)=>{
         if(err){
@@ -322,7 +336,7 @@ exports.createComment = (req,res)=>{
             })
 
         })
-        res.status(400).json({
+        res.status(200).json({
             msg:"comment saved successfully.."
         })
     })

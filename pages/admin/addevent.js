@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
-import Top from "../../components/top";
+
+import Top from "../../components/Top/navbar";
+
 import Eventform from "../../components/eventform.js";
 
 function Addevent() {

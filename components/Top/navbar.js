@@ -65,6 +65,11 @@ function Navbar() {
                             >
                                 Sign Out
                             </a>
+
+                            <Link href="/users/dashboard">
+                            <a>Dashboard</a>
+                        </Link>
+
                         </div>
                     )}
                     {!isAuthenticated() && (

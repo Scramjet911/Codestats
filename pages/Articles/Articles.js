@@ -3,7 +3,64 @@ import Link from "next/link";
 import Layout from "../../components/layout";
 import Navbar from "../../components/Top/navbar";
 import styles from "./article.module.css";
+
+import { useState ,useEffect} from 'react'
+import { useRouter } from "next/router";
+
+const API = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api":"http://localhost:8000/api";
+
 export default function Articles() {
+    const [articles,setarticles]=useState([])
+    const[article,setarticle]=useState([]);
+    const[category,setcategory]=useState("");
+    
+   
+    const router=useRouter()
+  const readmore=(event)=>{
+    event.preventDefault();
+    const id=event.target.id
+    router.push(`/Articles/view_article?id=${id}`)
+  }
+    useEffect(() => {
+      const result=fetch(`${API}/article`,{
+      method:"GET"}).then(
+         
+          res => res.json()).then(data=>{setarticles(data)
+            setarticle(data)
+            console.log(data)
+          }
+          
+  
+      )
+      .catch(err=>console.log(err));
+    
+  },[])
+  const handleChange =event=>{
+    setcategory(event.target.value)
+  }
+  const onSearch=event=>{
+    event.preventDefault();
+    console.log(category)
+    var data=[]
+    articles.forEach(element => {
+      console.log(element.category)
+      element.category.forEach(item=>{
+        if(item.name ==category    ){
+          console.log(category)
+          data.push(element)
+        
+         
+        }
+      })
+  
+      
+    });
+    setarticle(data)
+    console.log(article)
+    
+  
+  }
+
     return (
         <div>
             <Head>
@@ -25,22 +82,32 @@ export default function Articles() {
             </div>
             <div id="center">
                 <div className="search">
-                    <input type="text" placeholder="Search by category" />
+
+                    <input type="text" value={category} onChange={handleChange} placeholder="Search by category" />
                 </div>
                 <div className="search-category">
-                    <button type="submit" className="search-btn">
+                    <button type="submit" onClick={onSearch} className="search-btn">
+
                         <i className="fa fa-search"></i>
                     </button>
                 </div>
             </div>
             <div className={styles.wrapper}>
-                <div>
-                    <div className={styles.article_category}>Category1</div>
+
+                {article.map((item=>{
+                    return(<div>
+                        <div>
+                    <div className={styles.article_category}>{item.category.map(item=>{
+            return item.name
+          })}</div>
+
                 </div>
                 <div>
                     <div className="row">
                         <div id="center" className={styles.article_list}>
-                            <div className={styles.date}>dd/mm/yyyy</div>
+
+                            <div className={styles.date}>{new Date(item.createdAt).toDateString()}</div>
+
                             <div className={styles.bookmark}>
                                 <button>
                                     <i className="fas fa-bookmark"></i>
@@ -54,101 +121,28 @@ export default function Articles() {
                                 />
                             </div>
                             <div className={styles.details2}>
-                                <div className={styles.username}>@username</div>
-                                <div className={styles.category}>category:</div>
+
+                                <div className={styles.username}>@{item.author.username}</div>
+                                <div className={styles.category}>{item.category.map(item=>{
+                                    return item.name
+                                })}</div>
                             </div>
                             <div className={styles.article_content}>
-                                content: dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh dbfbd
-                                fjndf,mnabmnbfdm,fnas,vmnsbfamsb fjgkjhkldhdgf
-                                fkgjkh fjghgkh gkgjh
-                                dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh
-                                dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh
+                                {item.body.slice(0,10)}...
                                 <h2>
-                                    <a>Read more.....</a>
+                                <a onClick={readmore} id={item._id}>Read more..</a>
+
                                 </h2>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <div className={styles.article_category}>Category2</div>
-                    </div>
-                    <div className="row">
-                        <div id="center" className={styles.article_list}>
-                            <div className={styles.date}>dd/mm/yyyy</div>
-                            <div className={styles.bookmark}>
-                                <button>
-                                    <i className="fas fa-bookmark"></i>
-                                </button>
-                            </div>
-                            <div className="title">Article title</div>
-                            <div className={styles.avatar}>
-                                <img
-                                    src="/images/avatar.png"
-                                    className="image-size1"
-                                />
-                            </div>
-                            <div className={styles.details2}>
-                                <div className={styles.username}>@username</div>
-                                <div className={styles.category}>category:</div>
-                            </div>
-                            <div className={styles.article_content}>
-                                content: dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh dbfbd
-                                fjndf,mnabmnbfdm,fnas,vmnsbfamsb fjgkjhkldhdgf
-                                fkgjkh fjghgkh gkgjh
-                                dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh
-                                dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh
-                                <h2>
-                                    <a>Read more.....</a>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className="row">
-                        <div id="center" className={styles.article_list}>
-                            <div className={styles.date}>dd/mm/yyyy</div>
-                            <div className={styles.bookmark}>
-                                <button>
-                                    <i className="fas fa-bookmark"></i>
-                                </button>
-                            </div>
-                            <div className="title">Article title</div>
-                            <div className={styles.avatar}>
-                                <img
-                                    src="/images/avatar.png"
-                                    className="image-size1"
-                                />
-                            </div>
-                            <div className={styles.details2}>
-                                <div className={styles.username}>@username</div>
-                                <div className={styles.category}>category:</div>
-                            </div>
-                            <div className={styles.article_content}>
-                                content: dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh dbfbd
-                                fjndf,mnabmnbfdm,fnas,vmnsbfamsb fjgkjhkldhdgf
-                                fkgjkh fjghgkh gkgjh
-                                dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh
-                                dbfbdfjndf,mnabmnbfdm,fnas,vmnsbfamsb
-                                fjgkjhkldhdgf fkgjkh fjghgkh gkgjh
-                                <h2>
-                                    <a>Read more.....</a>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                    </div>)
+                }))}
+                
             </div>
-        </div>
+      </div>
+
     );
 }

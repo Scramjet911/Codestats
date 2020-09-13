@@ -1,5 +1,6 @@
 import Head from "next/head";
-import Top from "../../components/top.js";
+import Top from "../../components/Top/navbar";
+
 import Link from "next/link";
 import Profileleft from "../../components/profileleft.js";
 import Profilearticle from "../../components/profilearticle.js";
@@ -10,7 +11,9 @@ function Profile() {
             <Head>
                 <title>User Profile</title>
                 <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-                <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+                {/* <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> */}
+
                 <link
                     rel="stylesheet"
                     href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"

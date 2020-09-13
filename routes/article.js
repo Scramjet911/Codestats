@@ -5,7 +5,7 @@ const { check} = require('express-validator');
 
 const {isSignedIn,isAuthenticated,isAdmin} = require("../controllers/auth");
 const {getUserById} = require("../controllers/user");
-const {createArticle,uploadImage,getArticleById,updateArticle,getAllArticle,savingArticle,like,unlike,createComment, deleteComment,getCommentById, updateComment, getAllcomment,deleteArticle, deletesavingArticle}= require("../controllers/article")
+const {createArticle,uploadImage,getArticleById,updateArticle,getAllArticle,savingArticle,like,unlike,createComment, deleteComment,getCommentById, updateComment, getAllcomment,deleteArticle, deletesavingArticle, getOneArticle}= require("../controllers/article")
 
 router.param("userId",getUserById);
 router.param("articleId",getArticleById);
@@ -21,6 +21,7 @@ router.post("/article/create/:userId",[
 router.put("/article/update/:userId/:articleId",isSignedIn,isAuthenticated,updateArticle)
 router.post("/:userId/uploadimage",isSignedIn,isAuthenticated,uploadImage);
 router.delete("/article/delete/:userId/:articleId",isSignedIn,isAuthenticated,deleteArticle)
+router.get("/article/:articleId",getOneArticle);
 router.get("/article",getAllArticle);
 
 //saving article route
