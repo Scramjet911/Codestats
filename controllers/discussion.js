@@ -6,17 +6,22 @@ const {validationResult} = require('express-validator');
 
 exports.getDiscussionById = (req,res,next,id)=>{
     Discussion.findById(id)
-    .populate("category")
+    .populate("comments")
     .exec((err,discussion)=>{
         if(err){
             return res.status(400).json({
-                error:"can not get article"
+                error:"Cannot get Discussion"
             })
         }
         req.discussion = discussion
         next();
     })
 }
+
+exports.getDiscussion = (req, res)=>{
+    res.status(201).json(req.discussion);
+}
+
 exports.getCommentById = (req,res,next,id) =>{
     Comments.findById(id)
     .exec((err,comment)=>{
@@ -38,9 +43,12 @@ exports.createDiscussion = (req,res)=>{
         })
     }
     const discussion = new Discussion(req.body);
-    discussion.authername=req.profile.name;
+    // console.log(discussion);
+    discussion.authorname=req.profile.name;
+    discussion.author = req.params.userId;
     discussion.save((err,discussion)=>{
         if(err){
+            console.log(err);
             return res.status(400).json({
                 error:"can not save this discussion"
             })
@@ -82,7 +90,7 @@ exports.updateDiscussion= (req,res)=>{
 }
 exports.getAllDiscussion = (req,res)=>{
     Discussion.find()
-    .populate("comments")
+    // .populate("category")
     .exec((err,discussion)=>{
         if(err){
             return res.status(400).json({
@@ -171,12 +179,13 @@ exports.createComment = (req,res)=>{
     let discussion =req.discussion;
     let user= req.profile;
     const comment =new Comments(req.body);
-    comment.author=user._id;
+    comment.author=user.username;
     comment.discussion=discussion._id;
     comment.save((err,comment)=>{
         if(err){
+            // console.log(err, req.body);
             return res.status(400).json({
-                err:"can not save this comment"
+                err:"Could Not Save Comment"
             })
         }
         user.disc_comments.push(comment._id);
@@ -184,13 +193,13 @@ exports.createComment = (req,res)=>{
         user.save((err)=>{
             if(err){
                 return res.json({
-                    error:"comment not saved in user"
+                    error:"Comment not saved in User"
                 })
             }
             discussion.save((err)=>{
                 if(err){
                     return res.json({
-                        error:"comment not saved in discussion..."
+                        error:"Comment not saved in Discussion..."
                     })
                 }
             })
@@ -225,7 +234,7 @@ exports.deleteComment= (req,res)=>{
     let discussion = req.discussion;
     Comments.findById(id,(err,comment)=>{
        // console.log(comment)
-        if(err || String(comment.author._id)!= String(user._id)){
+        if(err || String(comment.author)!= String(user.username)){
             return res.json({
                 error:"can not find this comment or you are not authorised"
             })

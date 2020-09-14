@@ -4,7 +4,10 @@ import Navbar from "../../components/Top/navbar";
 import Write from "../../components/Write";
 import styles from "./discuss.module.css";
 import LikeButton from "../../components/like";
-export default function viewDiscussion() {
+
+const creatediscurl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/discussion/create/":"http://localhost:8000/api/discussion/create/";
+
+export default function CreateDisc() {
     return (
         <Layout>
             <Head>
@@ -30,27 +33,7 @@ export default function viewDiscussion() {
                     <div className={styles.title}>
                         <div className="title">Ask a question?</div>
                     </div>
-                    <div className={styles.question}>
-                        <label> Title : </label>
-                        <div>
-                            <input type="text" className={styles.input} />
-                        </div>
-                        <br />
-                        <label> Tags : </label>
-                        <div>
-                            <input type="text" className={styles.input} />
-                        </div>
-                    </div>
-                    <div className={styles.content}>
-                        <div className={styles.editor}>
-                            <Write />
-                        </div>
-                    </div>
-                    <div className={styles.bottom}>
-                        <button type="submit" className="btn btn-success mb-3">
-                            Post
-                        </button>
-                    </div>
+                    <Write url={creatediscurl}/>
                 </div>
             </div>
         </Layout>

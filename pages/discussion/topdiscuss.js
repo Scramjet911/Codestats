@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Link from "next/link";
-import Top from "../../components/top";
+import Top from "../../components/Top/navbar";
+import DiscussList from '../../components/discuss/discusslist'
 
 function Topdiscuss() {
     return (
@@ -22,16 +22,14 @@ function Topdiscuss() {
                     crossOrigin="anonymous"
                 />
             </Head>
-            <div>
-                <Top />
-            </div>
+            <Top />
             <div>
                 <div className="search-d">
                     <input type="text" placeholder="Search...." />
                 </div>
                 <div className="search-discuss">
                     <button type="submit" className="search-btn">
-                        <i class="fa fa-search"></i>
+                        <i className="fa fa-search"></i>
                     </button>
                 </div>
             </div>
@@ -49,147 +47,7 @@ function Topdiscuss() {
                     <div className="col-1 mtopdiscuss">Activity</div>
                 </div>
                 <hr className="hr-original" />
-                <div className="row">
-                    <div className="col-7 pl-4 ">
-                        <p className="text-discuss">
-                            There are going to be 3 parts of the while series ,
-                            each part having difficulty level higher than the
-                            previous level.{" "}
-                        </p>
-
-                        <p className="tags-discuss">react</p>
-                        <p className="tags-discuss">bootstrap</p>
-                        <p className="tags-discuss">node</p>
-                    </div>
-                    <div className="col-3">
-                        <img
-                            src="/images/avatar.png"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/loginImg.JPG"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/download.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/codechef.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/codechef.jpg"
-                            className="image-discuss"
-                        />
-                    </div>
-                    <div className="col-1">35</div>
-                    <div className="col-1">3d</div>
-                    <div className="col-1"></div>
-                </div>
-                <hr className="hr" />
-                <div className="row">
-                    <div className="col-7 pl-4 ">
-                        <p className="text-discuss">
-                            The border-style property can have from one to four
-                            values
-                        </p>
-
-                        <p className="tags-discuss">node</p>
-                        <p className="tags-discuss">bootstrap</p>
-                        <p className="tags-discuss">react</p>
-                    </div>
-                    <div className="col-3">
-                        <img
-                            src="/images/download.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/codechef.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/loginImg.JPG"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/avatar.png"
-                            className="image-discuss"
-                        />
-                    </div>
-                    <div className="col-1">35</div>
-                    <div className="col-1">3d</div>
-                    <div className="col-1"></div>
-                </div>
-                <hr className="hr" />
-                <div className="row">
-                    <div className="col-7 pl-4 ">
-                        <p className="text-discuss">
-                            The border-style property can have from one to four
-                            values
-                        </p>
-
-                        <p className="tags-discuss">node</p>
-                        <p className="tags-discuss">bootstrap</p>
-                        <p className="tags-discuss">react</p>
-                    </div>
-                    <div className="col-3">
-                        <img
-                            src="/images/download.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/codechef.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/loginImg.JPG"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/avatar.png"
-                            className="image-discuss"
-                        />
-                    </div>
-                    <div className="col-1">35</div>
-                    <div className="col-1">3d</div>
-                    <div className="col-1"></div>
-                </div>
-                <hr className="hr" />
-                <div className="row">
-                    <div className="col-7 pl-4 ">
-                        <p className="text-discuss">
-                            The border-style property can have from one to four
-                            values
-                        </p>
-
-                        <p className="tags-discuss">node</p>
-                        <p className="tags-discuss">bootstrap</p>
-                        <p className="tags-discuss">react</p>
-                    </div>
-                    <div className="col-3">
-                        <img
-                            src="/images/download.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/codechef.jpg"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/loginImg.JPG"
-                            className="image-discuss"
-                        />
-                        <img
-                            src="/images/avatar.png"
-                            className="image-discuss"
-                        />
-                    </div>
-                    <div className="col-1">35</div>
-                    <div className="col-1">3d</div>
-                    <div className="col-1"></div>
-                </div>
-                <hr className="hr" />
+                <DiscussList />
             </div>
         </div>
     );

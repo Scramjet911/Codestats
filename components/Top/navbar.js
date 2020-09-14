@@ -1,11 +1,12 @@
 import Head from "next/head";
 import {useRouter} from "next/router"
+import dynamic from 'next/dynamic'
 import styles from "./nav.module.css";
 import React, { useState } from "react";
-import HamburgerMenu from "react-hamburger-menu";
+// import HamburgerMenu from "react-hamburger-menu";
 
 import { signout, isAuthenticated } from "../auth/index";
-import Clock from "react-live-clock";
+const Clock = dynamic(()=>import("react-live-clock"),{ssr:false});
 import SignIn from "../login/signin";
 import SignUp from "../login/signup";
 import Link from "next/link";
@@ -91,7 +92,7 @@ function Navbar() {
                                         background: "black",
                                         width: "450px",
                                         top: "70px",
-                                        height: "600px",
+                                        height: "auto",
                                         borderStyle: "none",
                                         overflow: "hidden",
                                         opacity: "1",
@@ -111,8 +112,8 @@ function Navbar() {
                                     content: {
                                         background: "black",
                                         width: "450px",
-                                        top: "70px",
-                                        height: "600px",
+                                        top: "50px",
+                                        height: "auto",
                                         borderStyle: "none",
                                         overflow: "hidden",
                                         opacity: "1",
@@ -125,11 +126,11 @@ function Navbar() {
                             </Modal>
                             <a
                                 onClick={() => setModal2IsOpen(true)}
-                                className={styles.signup}
+                                className={styles.login}
                             >
                                 Sign Up
                             </a>
-                            <a className="icon" onClick={(e)=>e.preventDefault()}>
+                            {/* <a className="icon" onClick={(e)=>e.preventDefault()}>
                                 <HamburgerMenu
                                     isOpen={menuopen}
                                     menuClicked={() => handleClick()}
@@ -141,7 +142,7 @@ function Navbar() {
                                     borderRadius={0}
                                     animationDuration={0.5}
                                 />
-                            </a>
+                            </a> */}
                         </div>
                     )}
                     <Link href="/Events/events">
@@ -153,13 +154,15 @@ function Navbar() {
                     <a className={styles.dropdown}>
                         Discussion
                         <div className={styles.dropdown_content}>
+                                {isAuthenticated() && (
                             <span>
-                                <Link href="/discussion/ask_question">
-                                    <div>Ask question</div>
-                                </Link>
+                                    <Link href="/discussion/new">
+                                        <div>Ask question</div>
+                                    </Link>
                             </span>
+                                )}
                             <span>
-                                <Link href="/discussion/top_discussion">
+                                <Link href="/discussion/topdiscuss">
                                     <div>Top discussions</div>
                                 </Link>
                             </span>
@@ -168,11 +171,13 @@ function Navbar() {
                     <a className={styles.dropdown}>
                         Articles
                         <div className={styles.dropdown_content}>
+                                {isAuthenticated() && (
                             <span>
-                                <Link href="/Articles/Write_article">
-                                    <div>Write article</div>
-                                </Link>
+                                    <Link href="/Articles/Write_article">
+                                        <div>Write article</div>
+                                    </Link>
                             </span>
+                                )}
                             <span>
                                 <Link href="/Articles/Articles">
                                     <div>Article list</div>

@@ -3,7 +3,7 @@ const {ObjectId}=mongoose.Schema;
 
 var discussioncommentschema = new mongoose.Schema({
     author:{
-        type:ObjectId,
+        type:String,
         ref:'User',
         required:true
     },

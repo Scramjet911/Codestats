@@ -39,6 +39,7 @@
   }
   
   .username{
+    height: 20px;
     left:3px;
     font-size:15px;
     color:rgb(160, 119, 42);
@@ -71,7 +72,7 @@
      display:flex;
      flex-direction: column;
   }
-  .conversation>textarea{
+  .conversation>div>textarea{
     width:100%;
     border-top-width: 0px;
     border-left-width: 0px;
@@ -82,7 +83,19 @@
     font-weight: normal;
     overflow-x:hidden;
     overflow-y:hidden;
-    height:40px;
+    height:80px;
+    resize: none;
+  }
+  .comment-area{
+    display: block;
+  }
+  .comment-btn{
+    width:fit-content;
+    position: relative;
+    float:right;
+    height: 30px;
+    color: azure;
+    background-color: #112246;
   }
   .control>input{
     width:100%;

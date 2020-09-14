@@ -9,23 +9,23 @@ router.param("userId",getUserById);
 router.param("categoryId",getCategoryById);
 
 
-router.post("/category/create/:userId",
+router.post("/create/:userId",
 isSignedIn,
 isAuthenticated, 
 createCategory
 );
 
-router.get("/category/:categoryId",getCategory);    
-router.get("/category/",getAllCategory);
+router.get("/:categoryId",getCategory);    
+router.get("/",getAllCategory);
 
-router.put("/category/:categoryId/:userId",
+router.put("/:categoryId/:userId",
 isSignedIn,
 isAuthenticated,
 isAdmin,
 upadateCategory
 );
 
-router.delete("/category/:categoryId/:userId",
+router.delete("/:categoryId/:userId",
 isSignedIn,
 isAuthenticated,
 isAdmin,

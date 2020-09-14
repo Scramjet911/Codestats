@@ -82,10 +82,10 @@ app.use("/api/user",userRoutes);
 app.use("/api/subscription",subscriberRoutes);
 app.use("/api",eventRoutes);
 app.use("/api",articleRoutes);
-app.use("/api",categoryRoutes);
+app.use("/api/category",categoryRoutes);
 app.use("/api",resourceRoutes);
 app.use("/api/chat",chatRoutes);
-app.use("/api",discussionRoutes);
+app.use("/api/discussion",discussionRoutes);
 
 nextapp.prepare().then(()=>{
     app.get('/*',(req, res)=>{
