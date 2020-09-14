@@ -6,7 +6,6 @@ import styles from "../styles/Home.module.css";
 const EventsList = dynamic(() => import("../components/Event/Event_card"), {
     ssr: false,
 });
-import Chat from "../components/chat/chat";
 
 export default function Home() {
     return (
@@ -26,6 +25,12 @@ export default function Home() {
                     rel="stylesheet"
                     href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
                     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+                    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
                     crossOrigin="anonymous"
                 />
             </Head>
@@ -72,7 +77,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <Chat />
         </Layout>
     );
 }

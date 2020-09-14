@@ -9,7 +9,7 @@ const discussionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    authername:{
+    authorname:{
         type:String
     },
     author:{
@@ -18,7 +18,7 @@ const discussionSchema = new mongoose.Schema({
             required:true
     },
     category:[{
-        type:ObjectId,
+        type:String,
         ref:"Category",
         required:true
     }],

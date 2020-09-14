@@ -145,7 +145,7 @@ hr {
 }
 .login-input-pos{
   position: relative;
-  top:120px;
+  top:30px;
   height: 200px;
 
 }
@@ -989,10 +989,7 @@ select:focus {
     "Lucida Sans", Arial, sans-serif;
   color: ivory;
 }
-.login-input-pos {
-  position: relative;
-  top: 150px;
-}
+
 .event-card {
   position: relative;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
