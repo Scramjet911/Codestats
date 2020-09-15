@@ -56,7 +56,7 @@ class Chat extends Component{
                 query:{token:token}
                 });
             this.setState({socket : socket});
-            console.log(token, username);
+            // console.log(token, username);
             
             socket.on('connect',()=>{
                 // console.log('Connected',socket);

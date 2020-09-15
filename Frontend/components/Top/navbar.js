@@ -6,7 +6,7 @@ import React, { useState } from "react";
 // import HamburgerMenu from "react-hamburger-menu";
 
 import { signout, isAuthenticated } from "../auth/index";
-const Clock = dynamic(()=>import("react-live-clock"),{ssr:false});
+import Clock from "react-live-clock";
 import SignIn from "../login/signin";
 import SignUp from "../login/signup";
 import Link from "next/link";

@@ -193,7 +193,7 @@ export default class Write extends Component {
 
         if (localval) {
             localval = JSON.parse(localval);
-            console.log(this.titleInput.current.value);
+            // console.log(this.titleInput.current.value);
             if(this.titleInput.current.value.length>0 && taglist.length>0 && this.state.quillhtml.length>0){
                 fetch(this.props.url + localval.user._id, {
                     method: "POST",

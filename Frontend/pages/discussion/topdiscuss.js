@@ -1,5 +1,6 @@
 import Head from "next/head";
-import Top from "../../components/Top/navbar";
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
 import DiscussList from '../../components/discuss/discusslist'
 
 function Topdiscuss() {
@@ -22,7 +23,7 @@ function Topdiscuss() {
                     crossOrigin="anonymous"
                 />
             </Head>
-            <Top />
+            <Navbar />
             <div>
                 <div className="search-d">
                     <input type="text" placeholder="Search...." />

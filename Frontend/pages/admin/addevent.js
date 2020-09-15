@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import Top from "../../components/Top/navbar";
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
 
 import Eventform from "../../components/eventform.js";
 
@@ -20,7 +21,7 @@ function Addevent() {
         />
       </Head>
       <div>
-        <Top />
+        <Navbar />
       </div>
       <div className="container">
         <div className="row">

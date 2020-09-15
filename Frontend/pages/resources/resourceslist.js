@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import Top from "../../components/top";
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
 import Resourceitem from "../../components/resources/resourceitem.js";
 import Categorysidecard from "../../components/resources/categorysidecard.js";
 
@@ -25,7 +26,7 @@ function Resourceslist() {
                 />
             </Head>
             <div>
-                <Top />
+                <Navbar />
             </div>
             <div>
                 <h1 className="title-resource ">Resources on React</h1>

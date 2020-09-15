@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "../../components/layout";
-import Navbar from "../../components/Top/navbar";
+import dynamic from 'next/dynamic'
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
 import styles from "./article.module.css";
 
 import { useState ,useEffect} from 'react'

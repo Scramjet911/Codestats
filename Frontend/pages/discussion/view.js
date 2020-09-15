@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Navbar from "../../components/Top/navbar";
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
 import styles from "./discuss.module.css";
 import LikeButton from "../../components/like";
 import { withRouter } from "next/router";

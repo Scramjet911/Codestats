@@ -4,6 +4,7 @@ import Link from "next/link";
 function Profileleft(props) {
   const profile=props.profile
   console.log(profile)
+  if(profile){
   return (
     <div>
       <img src="/images/loginImg.JPG" alt="..." />
@@ -25,5 +26,8 @@ function Profileleft(props) {
 
     </div>
   );
+      }
+      return <></>
+
 }
 export default Profileleft;

@@ -1,4 +1,4 @@
-require('dotenv').config({path:__dirname+'/.env'});
+require('dotenv').config({path:__dirname+'/../.env'});
 
 const mongoose = require('mongoose');
 const express=require('express');
@@ -9,14 +9,12 @@ const cors = require('cors');
 const webpush = require('web-push');
 const Agenda = require('agenda');
 const http = require('http').Server(app);
-// const http = require('http');
 const {parse} = require('url');
 
-// let httpServer;
 
 const next = require('next');
 const dev = process.env.NODE_ENV !== 'production';
-const nextapp = next({dev});
+const nextapp = next({'dev':dev,'dir':'../Frontend'});
 const nexthandle = nextapp.getRequestHandler();
 
 

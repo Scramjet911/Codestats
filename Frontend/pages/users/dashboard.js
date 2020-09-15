@@ -1,8 +1,7 @@
 import Head from "next/head";
 
-import Top from "../../components/Top/navbar";
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
 
-import Link from "next/link";
 import Profileleft from "../../components/profileleft.js";
 import Profilearticle from "../../components/profilearticle.js";
 import Savedarticles from "../../components/savedarticles.js";
@@ -10,12 +9,13 @@ import Addeventcard from "../../components/addeventcard.js";
 
 import {useState,useEffect} from 'react'
 import { isAuthenticated } from '../../components/auth/index';
+import dynamic from "next/dynamic";
 
 
 const API = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api":"http://localhost:8000/api";
 function Dashboard() {
   const [profile,setprofile]=useState([])
- 
+  const [loaded, setloaded]=useState(false);
   console.log(API)
   useEffect(() => {
     
@@ -32,7 +32,7 @@ function Dashboard() {
           ).then(data=>{
             console.log(data)
             setprofile(data)
-          
+            setloaded(true);
           
         }
         
@@ -61,18 +61,19 @@ function Dashboard() {
         />
       </Head>
       <div>
-        <Top />
+        <Navbar />
       </div>
       <div className="container">
         <div className="row">
           <div className="col-3 mt-5">
-            <Profileleft logged={1} profile={profile} />
+            {loaded && (<Profileleft logged={1} profile={profile} />)}
           </div>
           <div className="col-9 mt-5 ">
-            
+            {loaded && (<>
             <Addeventcard />
             <Profilearticle logged={1}  profile={profile}/>
             <Savedarticles  profile={profile}/>
+            </>)}
           </div>
         </div>
       </div>

@@ -4,13 +4,13 @@
   "description": "The Codestats website",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "set NODE_ENV=development&& nodemon app.js",
-    "dev-lnx": "NODE_ENV=development&& nodemon app.js",
-    "build": "next build",
-    "heroku-postbuild": "next build",
-    "front": "next start -p 8000",
-    "front-dev": "next dev -p 8000"
+    "start": "cd Backend && node app.js",
+    "dev": "set NODE_ENV=development&& cd Backend && nodemon app.js",
+    "dev-lnx": "NODE_ENV=development&& cd Backend && nodemon app.js",
+    "build": "cd Frontend && next build",
+    "heroku-postbuild": "cd Frontend && next build",
+    "front": "cd Frontend && next start -p 8000",
+    "front-dev": "cd Frontend && next dev -p 8000"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
   "dependencies": {
     "agenda": "^3.1.0",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -40,24 +41,23 @@
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "mongoose": "^5.9.26",
+    "next": "9.5.1",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
-    "socket.io": "^2.3.0",
-    "socketio-jwt": "^4.6.2",
-    "uuid": "^8.3.0",
-    "web-push": "^3.4.4",
-    "bootstrap": "^4.5.2",
-    "next": "9.5.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "16.13.1",
+    "react-hamburger-menu": "^1.2.1",
     "react-hook-form": "^6.7.2",
     "react-live-clock": "^4.0.5",
     "react-modal": "^3.11.2",
+    "react-quill": "^1.3.5",
     "react-router-dom": "^5.2.0",
     "sass": "^1.26.10",
+    "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "react-hamburger-menu": "^1.2.1",
-    "react-quill": "^1.3.5"
+    "socketio-jwt": "^4.6.2",
+    "uuid": "^8.3.0",
+    "web-push": "^3.4.4"
   }
 }

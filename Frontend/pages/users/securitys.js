@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../../components/Top/navbar";
+import dynamic from 'next/dynamic'
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 function Securitys() {

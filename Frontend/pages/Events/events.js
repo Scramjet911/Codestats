@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "../../components/layout";
-import Navbar from "../../components/Top/navbar";
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
 import styles from "./events.module.css";
 import dynamic from 'next/dynamic'
 const EventsList = dynamic(()=>import('../../components/Event/Event_card'),{ssr:false}); 

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import Navbar from "../../components/Top/navbar";
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
 import Layout from "../../components/layout";
 import { useForm } from "react-hook-form";
 import { useState } from "react";

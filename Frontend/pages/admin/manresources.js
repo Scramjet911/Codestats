@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import Top from "../../components/Top/navbar";
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
 
 
 function Manresources() {
@@ -19,7 +20,7 @@ function Manresources() {
                 />
             </Head>
             <div>
-                <Top />
+                <Navbar />
             </div>
             <div className="container">
                 <div className="row">

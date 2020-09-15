@@ -1,4 +1,4 @@
-import Router, { withRouter } from "next/router";
+import { withRouter } from "next/router";
 const { Component } = require("react");
 
 let discussurl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/discussion/":"http://localhost:8000/api/discussion/";
@@ -43,7 +43,7 @@ class DiscussList extends Component{
                     <div className="row">
                         <div className="col-7 pl-4 ">
                             <p className="text-discuss" onClick={()=>this.openDiscuss(d)}>
-                                {d.body}
+                                {d.title}
                             </p>
                             {categories}
                         </div>

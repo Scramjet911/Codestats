@@ -12,6 +12,7 @@ function Profilearticle(props) {
     const id=event.target.id
     router.push(`/Articles/view_article?id=${id}`)
   }
+  if(profile){
   console.log(profile.posts)
 
   return (
@@ -30,7 +31,7 @@ function Profilearticle(props) {
             <h1 className="display-4">Articles</h1>
 
             <h2>
-              {props.user} has written {props.articleCount} articles
+              {profile.username} has written {profile.posts.length} articles
             </h2>
           </div>
         )}
@@ -51,5 +52,7 @@ function Profilearticle(props) {
       </div>
     </div>
   );
+      }
+      return <></>
 }
 export default Profilearticle;
