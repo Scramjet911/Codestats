@@ -2,9 +2,12 @@ import Head from "next/head";
 import Layout from "../../components/layout";
 import dynamic from 'next/dynamic'
 const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
-import Write from "../../components/Write";
 import styles from "./article.module.css";
 import LikeButton from "../../components/like";
+import Write from "../../components/Write"
+const creatediscurl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/article/create/":"http://localhost:8000/api/article/create/";
+
+
 export default function WriteArticle() {
     return (
         <Layout>
@@ -31,27 +34,10 @@ export default function WriteArticle() {
                     <div className={styles.title}>
                         <div className="title">Write an article</div>
                     </div>
-                    <div className={styles.question}>
-                        <label> Title : </label>
-                        <div>
-                            <input type="text" className={styles.input} />
-                        </div>
-                        <br />
-                        <label> Tags : </label>
-                        <div>
-                            <input type="text" className={styles.input} />
-                        </div>
-                    </div>
-                    <div className={styles.content}>
-                        <div className={styles.editor}>
-                            <Write />
-                        </div>
-                    </div>
-                    <div className={styles.bottom}>
-                        <button type="submit" className="btn btn-success mb-3">
-                            Publish
-                        </button>
-                    </div>
+                    
+                    
+                            <Write url={creatediscurl} />
+
                 </div>
             </div>
         </Layout>

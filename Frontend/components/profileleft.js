@@ -11,7 +11,6 @@ function Profileleft(props) {
   <h1 className="namepr mt-3">{profile.name}</h1>
       <p className="bio mt-3">Just a few words about yourself.</p>
       <p className="uname mt-3 ml-5">@{profile.username}</p>
-
       <br />
       {props.logged == 0 && (
         <a className="btn btn-outline-success text-white ml-5" role="button">
@@ -23,7 +22,6 @@ function Profileleft(props) {
       <p className="h4">Education</p>
       <p className="bio mt-2">{profile.occupation}</p>
       <p className="bio">{profile.institution}</p>
-
     </div>
   );
       }

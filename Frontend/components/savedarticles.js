@@ -10,12 +10,10 @@ function Savedarticles(props) {
     id=event.target.id
     router.push(`/Articles/view_article?id=${id}`)
   }
-
   return (
     <div>
       <div className="jumbotron j1 shadow text-white">
         <h1 className="h2">Saved Articles</h1>
-
       <p>You have  {profile.savedarticles &&(<span>{profile.savedarticles.length ===0?"no":profile.savedarticles.length}</span>)} savedarticles</p>
       {profile.savedarticles &&profile.savedarticles.length !=0 && (
         <div>
@@ -35,13 +33,11 @@ function Savedarticles(props) {
        
         
         {/* <hr className="hr mx-5" />
-
         <div className="row justify-content-end ">
           <a className="btn btn-see btn-outline-light " href="#" role="button">
             SEE ALL
           </a>
         </div> */}
-
       </div>
     </div>
   );

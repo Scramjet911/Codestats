@@ -12,7 +12,7 @@ const { Mongoose } = require("mongoose");
 
 exports.getArticleById = (req,res,next,id) =>{
     Article.findById(id)
-    .populate("category")
+    //.populate("category")
     .exec((err,article)=>{
         if(err){ 
             return res.status(400).json({
@@ -38,7 +38,7 @@ exports.getCommentById = (req,res,next,id) =>{
 exports.getOneArticle = (req,res) =>{
     Article.findById(req.article._id)
     .populate("author",'username')
-    .populate("category",'name')
+    //.populate("category",'name')
     .exec((err,article)=>{
         if(err){ 
             return res.status(400).json({
@@ -59,6 +59,7 @@ exports.createArticle = (req,res) =>{
     }
     const article=new Article(req.body);
     article.authorname=req.profile.username;
+    article.author=req.profile._id;
     article.save((err,article)=>{
         if(err){
             res.status(400).json({
@@ -203,7 +204,7 @@ exports.getAllArticle =(req,res) =>{
     let sortBy=req.query.sortBy?req.query.sortBy :"createdAt"
     Article.find()
     .populate("author",'username')
-    .populate("category",'name')
+    //.populate("category",'name')
     .sort([[sortBy,"desc"]])
     .limit(limit)
     .exec((err,articles)=>{
@@ -336,9 +337,7 @@ exports.createComment = (req,res)=>{
             })
 
         })
-        res.status(200).json({
-            msg:"comment saved successfully.."
-        })
+        res.status(200).json(comment)
     })
 
 
@@ -398,12 +397,12 @@ exports.updateComment= (req,res)=>{
 }
 // for get all comments of a article
 exports.getAllcomment =(req,res) =>{
-    let limit=req.query.limit?parseInt(req.query.limit) :5
+    let limit=req.query.limit?parseInt(req.query.limit) :50
     let sortBy=req.query.sortBy?req.query.sortBy :"createdAt"
     let art = req.article;
     Comment.find({article : art._id})
    .populate("author",'username')
-   .populate("article",'title')
+   //.populate("article",'title')
     .sort([[sortBy,"asc"]])
     .limit(limit)
     .exec((err,comments)=>{

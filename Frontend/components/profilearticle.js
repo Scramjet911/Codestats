@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-
 import { useRouter } from "next/router";
 
 function Profilearticle(props) {
@@ -14,7 +13,6 @@ function Profilearticle(props) {
   }
   if(profile){
   console.log(profile.posts)
-
   return (
     <div>
       <div className="jumbotron j1 text-white">
@@ -48,7 +46,6 @@ function Profilearticle(props) {
             </div>
           )
         })}
-
       </div>
     </div>
   );

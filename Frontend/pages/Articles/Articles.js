@@ -4,10 +4,8 @@ import Layout from "../../components/layout";
 import dynamic from 'next/dynamic'
 const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
 import styles from "./article.module.css";
-
 import { useState ,useEffect} from 'react'
 import { useRouter } from "next/router";
-
 const API = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api":"http://localhost:8000/api";
 
 export default function Articles() {
@@ -46,7 +44,7 @@ export default function Articles() {
     articles.forEach(element => {
       console.log(element.category)
       element.category.forEach(item=>{
-        if(item.name ==category    ){
+        if(item ==category    ){
           console.log(category)
           data.push(element)
         
@@ -61,7 +59,6 @@ export default function Articles() {
     
   
   }
-
     return (
         <div>
             <Head>
@@ -89,25 +86,21 @@ export default function Articles() {
             </div>
             <div id="center">
                 <div className="search">
-
                     <input type="text" value={category} onChange={handleChange} placeholder="Search by category" />
                 </div>
                 <div className="search-category">
                     <button type="submit" onClick={onSearch} className="search-btn">
-
                         <i className="fa fa-search"></i>
                     </button>
                 </div>
             </div>
             <div className={styles.wrapper}>
-
-                {article.map((item=>{
+                {article && article.map((item=>{
                     return(<div>
                         <div>
                     <div className={styles.article_category}>{item.category.map(item=>{
-            return item.name
+            return item
           })}</div>
-
                 </div>
                 <div>
                     <div className="row">
@@ -120,7 +113,7 @@ export default function Articles() {
                                     <i className="fas fa-bookmark"></i>
                                 </button>
                             </div>
-                            <div className="title">Article title</div>
+                            <div className="title">{item.title}</div>
                             <div className={styles.avatar}>
                                 <img
                                     src="/images/avatar.png"
@@ -128,28 +121,24 @@ export default function Articles() {
                                 />
                             </div>
                             <div className={styles.details2}>
-
                                 <div className={styles.username}>@{item.author.username}</div>
-                                <div className={styles.category}>{item.category.map(item=>{
-                                    return item.name
-                                })}</div>
+                                {item.category.map((item,index)=>{
+                                    return <div key={index} className={styles.tags}>{item}</div>
+                                })}
                             </div>
                             <div className={styles.article_content}>
-                                {item.body.slice(0,10)}...
+                            
                                 <h2>
-                                <a onClick={readmore} id={item._id}>Read more..</a>
-
+                                <Link href="#"><a onClick={readmore} id={item._id}>Read more..</a></Link>
                                 </h2>
                             </div>
                         </div>
                     </div>
                 </div>
-
                     </div>)
                 }))}
                 
             </div>
       </div>
-
     );
 }

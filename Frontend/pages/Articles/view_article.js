@@ -1,29 +1,57 @@
 import Head from "next/head";
-import Layout from "../../components/layout";
 import dynamic from 'next/dynamic'
 const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
-import Write from "../../components/Write";
 import styles from "./article.module.css";
 import LikeButton from "../../components/like";
-
 import { useEffect, useState } from "react";
+
 import { isAuthenticated } from "../../components/auth";
 const API = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api":"http://localhost:8000/api";
+const Quill = dynamic(import("react-quill"), {
+    ssr: false,
+    loading: () => <p>Loading ...</p>,
+});
 
 export default function ViewArticle() {
-    let id=""
-    const[article,setarticle]=useState([]);
+    
+    const[article,setarticle]=useState(null);
     const[comment,setcomment]=useState("");
-    if (typeof window != "undefined"){
-    let queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const qid = urlParams.get('id')
+    const[comments,setcomments]=useState([])
+    
+    const f=()=>{
+        let id=""
+            if (typeof window != "undefined"){
+                let queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const qid = urlParams.get('id')
+                 id=qid
+                } 
+        
+        fetch(`${API}/article/getallcomment/${id}`,{
+        method:"GET"}).then(
+           
+            res => res.json()).then(data=>{
+              setcomments(data)
+              console.log(data)
+            }
+            
+    
+        )
+        .catch(err=>console.log(err));
+        }
 
-        id=qid
-    console.log(id)
 
-    } 
     useEffect(()=>{
+        let id=""
+        if (typeof window != "undefined"){
+            let queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const qid = urlParams.get('id')
+        
+                id=qid
+            console.log(id)
+        
+            } 
         fetch(`${API}/article/${id}`,{
             method:"GET"}).then(
                
@@ -35,6 +63,8 @@ export default function ViewArticle() {
         
             )
             .catch(err=>console.log(err));
+                
+            f()
           
         },[])
         const handleChange = (event) => {
@@ -42,6 +72,13 @@ export default function ViewArticle() {
             }
         const commentpost=(event)=>{
             event.preventDefault()
+            let id=""
+            if (typeof window != "undefined"){
+                let queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const qid = urlParams.get('id')
+                 id=qid
+                } 
             const {user,token}=isAuthenticated()
             fetch(`${API}/article/addcomment/${user._id}/${id}`,{
                 method:"POST",
@@ -54,13 +91,19 @@ export default function ViewArticle() {
                     "body":`${comment}`
                 })
             }).then(resposnse =>{
-                setcomment("")
-                return resposnse.json();
+                if(resposnse.status!=200){
+                    console.log("error in comment send")
+                    return;
+                }
+            
+            f()
+            setcomment("")
+
             })
             .catch(err=>console.log(err));
-    
+           
+           
         }
-
     return (
         <div>
             <Head>
@@ -85,7 +128,6 @@ export default function ViewArticle() {
             <div id="row">
                {article &&( <div className={styles.article_body}>
                     <div className={styles.date}>{new Date(article.createdAt).toDateString()}</div>
-
                     <div className={styles.bookmark}>
                         <button>
                             {" "}
@@ -93,19 +135,22 @@ export default function ViewArticle() {
                         </button>
                     </div>
                     <div className="title">{article.title}</div>
-
                     <div className={styles.avatar}>
                         <img src="/images/avatar.png" className="image-size1" />
                     </div>
                     <div className={styles.details2}>
-
                     <div className={styles.username}>@{article.author &&(<span>{article.author.username}</span>)} </div>
                         <div className={styles.category}>category:{article.category && article.category.map(item=>{
-                                    return item.name
+                                    return item
                                 })}</div>
                     </div>
-                    <div className={styles.article_content}>{article.body}</div>
-
+                    <div className={styles.article_content}><div>
+                    <Quill 
+                                value={article.body} 
+                                readOnly={true}
+                                theme="snow"
+                                modules={{toolbar:false}}
+                            /></div></div>
                     <div className={styles.hl} />
                     <div className="row">
                         <div className={styles.reaction}>
@@ -121,48 +166,22 @@ export default function ViewArticle() {
                         <textarea
                             className={styles.control}
                             placeholder="Comment here....."
-
                             onChange={handleChange}
                             value={comment}
                         />
                         <div>
                         <button type="button" class="btn btn-primary" onClick={commentpost}>post</button>
                         </div>
-
                         Comment List:
-                        <div id="row">
-                            <div className={styles.username}>@username1</div>
+                        {comments && comments.length!=0 &&( comments.map((item)=>{
+                            return(
+                            <div id="row">
+                            <div className={styles.username}>@{item.author.username}</div>
                             <div className={styles.reply}>
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                vkhkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
+                                {item.body}
                             </div>
-                        </div>
-                        <div id="row">
-                            <div className={styles.username}>@username2</div>
-                            <div className={styles.reply}>
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                vkhkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                            </div>
-                        </div>
-                        <div id="row">
-                            <div className={styles.username}>@username3</div>
-                            <div className={styles.reply}>
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                vkhkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                                khkjhkljlk;lkfdgfklkjhlkgfjhgjhkljl
-                            </div>
-                        </div>
+                        </div>)
+                        }))}
                     </div>
 
                 </div>)}

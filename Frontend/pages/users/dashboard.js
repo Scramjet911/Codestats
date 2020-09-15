@@ -6,7 +6,6 @@ import Profileleft from "../../components/profileleft.js";
 import Profilearticle from "../../components/profilearticle.js";
 import Savedarticles from "../../components/savedarticles.js";
 import Addeventcard from "../../components/addeventcard.js";
-
 import {useState,useEffect} from 'react'
 import { isAuthenticated } from '../../components/auth/index';
 import dynamic from "next/dynamic";
@@ -79,6 +78,5 @@ function Dashboard() {
       </div>
     </div>
   );
-
 }
 export default Dashboard;

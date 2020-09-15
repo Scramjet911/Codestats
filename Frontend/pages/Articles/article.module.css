@@ -107,9 +107,9 @@
   .details2{
     position: relative;
     width:500px;
-    height:30px;
+    /* height:30px; */
     padding-left:5rem;
-    top:-50px;
+    /* top:-50px; */
   }
   .username{
     left:3px;
@@ -132,10 +132,21 @@
   .article_content{
     top:0px;
     padding:1rem;
-    padding-top:0rem;
+    /* padding-top:0rem; */
     padding-left:1rem;
     font-weight:normal;
     height: 100%;
+  }
+  .tags {
+    position: relative;
+    /* top: -10px; */
+    font-size: 12px;
+    border-style: ridge;
+    border-radius: 5px;
+    border-width: thin;
+    display: inline;
+    margin-left: 5px;
+    padding: 2px;
   }
   .editor{
     top:0px;
@@ -247,9 +258,9 @@
 .avatar{
   position:relative;
   width:70px;
-  height: 70px;
-  top:15px;
-  background-image: linear-gradient(to bottom, rgb(7, 233, 233), rgb(7, 22, 88)) ;
+  /* height: 70px; */
+  /* top:15px; */
+  /* background-image: linear-gradient(to bottom, rgb(7, 233, 233), rgb(7, 22, 88)) ; */
   border-radius:50px;
   text-align: center;
 }
