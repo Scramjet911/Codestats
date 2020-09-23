@@ -1,5 +1,3 @@
-import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 function Savedarticles(props) {
@@ -8,7 +6,7 @@ function Savedarticles(props) {
   const readmore=(event)=>{
     event.preventdefault();
     id=event.target.id
-    router.push(`/Articles/view_article?id=${id}`)
+    router.push(`/Articles/view?id=${id}`)
   }
   return (
     <div>

@@ -34,10 +34,10 @@ exports.getAllCategory=(req,res)=>{
     Category.find().exec((err,categories)=>{
         if(err){
             res.status(400).json({
-                error:"No category find"
+                error:"No Category found"
             });
         }
-        res.json(categories);
+        res.status(200).json(categories);
     })
 }
 exports.upadateCategory = (req,res)=>{

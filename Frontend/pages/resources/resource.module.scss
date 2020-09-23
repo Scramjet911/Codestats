@@ -1,0 +1,104 @@
+.resource_cards {
+    border-style: none;
+    text-align: center;
+    border-color: rgb(15, 153, 158);
+    background-color: rgba(10, 24, 51, 0.575);
+    position: relative;
+    top: 250px;
+    width: 250px;
+    left: 15px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 10px;
+    &:hover{
+    cursor: pointer;
+    transform: translate(10px,10px);
+    box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.425);
+    }
+}
+.page_title {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    color: rgb(247, 248, 255);
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    top: 100px;
+}
+@media screen and (max-width: 600px) {
+    .page_title {
+        width: 1300px;
+    }
+}
+.icon {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    left: 65px;
+    top: -30px;
+}
+.category {
+    position: absolute;
+    top: 125px;
+    text-align: center;
+    width: 250px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+.count {
+    position: absolute;
+    top: 175px;
+    text-align: center;
+    width: 250px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(182, 145, 103);
+}
+.search{
+    position:absolute;
+    top:200px;
+    left:35%;
+    text-align: center;
+    width: 400px;
+    border-radius: 20px;
+    input[type=text] {
+        position: relative;
+        float: left;
+        left:0px;
+        right:0px;
+        padding: 20px;
+        background: none;
+        border-style: double;
+        font-size: 17px;
+        border-bottom-left-radius: 25px;
+        border-top-left-radius:25px;
+        border-color: rgb(7, 15, 31);
+        width: 80%;
+        height: 50px;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+        color: rgb(15, 153, 158);
+    }
+    &:hover, &:focus-within{
+        box-shadow: 0px 0px 15px rgba(190, 206, 255, 0.692);
+    }
+    .search-btn {
+        height: 46.5px;
+        width: 60px;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        float: right;
+        background: rgba(7, 15, 31, 0.925);
+      }
+}
+
+.search-btn{
+    position: relative;;
+    // top:200px;
+    float: right;
+    // left:850px;
+}

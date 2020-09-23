@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Modal from "react-modal";
 import React, { useState } from "react";
-import Eventform from "./eventform.js";
+import Eventform from "../eventform.js";
 
 function Addeventcard() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
