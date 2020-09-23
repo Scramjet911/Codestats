@@ -1,8 +1,8 @@
 import Head from "next/head";
 const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
 import dynamic from 'next/dynamic'
-const Profileleft = dynamic(import("../../components/profileleft.js"),{ssr:false});
-const Profilearticle = dynamic(import("../../components/profilearticle.js"),{ssr:false});
+const Profileleft = dynamic(import("../../components/user/profileleft.js"),{ssr:false});
+const Profilearticle = dynamic(import("../../components/user/profilearticle.js"),{ssr:false});
 import { Component } from "react";
 
 const profileurl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/user/":"http://localhost:8000/api/user/";
@@ -41,9 +41,6 @@ class Profile extends Component{
             <div>
                 <Head>
                     <title>User Profile</title>
-                    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
-                    {/* <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> */}
 
                     <link
                         rel="stylesheet"

@@ -1,20 +1,21 @@
 import Head from "next/head";
 import Layout from "../../components/layout";
-import dynamic from 'next/dynamic'
-const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});;
+import dynamic from "next/dynamic";
+const Navbar = dynamic(import("../../components/Top/navbar"), { ssr: false });
 import Write from "../../components/Write";
 import styles from "./discuss.module.css";
 import LikeButton from "../../components/like";
 
-const creatediscurl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/discussion/create/":"http://localhost:8000/api/discussion/create/";
+const creatediscurl =
+    process.env.NODE_ENV === "production"
+        ? "//codestats-test.herokuapp.com/api/discussion/create/"
+        : "http://localhost:8000/api/discussion/create/";
 
 export default function CreateDisc() {
     return (
         <Layout>
             <Head>
                 <title>Display</title>
-                <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-                <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                 <link
                     rel="stylesheet"
                     href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -34,7 +35,11 @@ export default function CreateDisc() {
                     <div className={styles.title}>
                         <div className="title">Ask a question?</div>
                     </div>
-                    <Write url={creatediscurl}/>
+                    <Write
+                        url={creatediscurl}
+                        name="Discussion"
+                        nextPage="/discussion/top"
+                    />
                 </div>
             </div>
         </Layout>

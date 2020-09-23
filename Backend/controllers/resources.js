@@ -19,7 +19,7 @@ exports.getResourceById= (req,res)=>{
 
 }
 exports.getResources = (req,res)=>{
-    Category.find()
+    Category.find({"resourceCount":{$gt:0}})
     .exec((err,category)=>{
         if(err){ 
             return res.status(400).json({
@@ -56,35 +56,25 @@ exports.createResources = (req,res) =>{
     }
     
     const resource=new Resources(req.body);
-
+    console.log(resource);
     resource.save((err,resource)=>{
         if(err){
             return res.status(400).json({
-                error:"can not save this resource"
+                error:"Could not save Resource"
             })
         }
         const cat=resource.category;
         console.log(cat)
         cat.forEach(item => {
-            Category.findById(item,(err,category)=>{
+            Category.findOneAndUpdate({name:item}, {$inc:{resourceCount:1}, $setOnInsert:{name:item}}, {upsert:true}, (err,category)=>{
                 if(err){
                     return res.status(400).json({
                         error:"Error occured choosing this category"
                     })
                 }
-                category.resourceCount+=1;
-                category.save((err)=>{
-                    if(err){
-                        return res.status(400).jsErroon({
-                            error:"r occured saving in this category"
-                        })
-                    }
-                });
-            })
-            
+            });
         });
-
-        res.json({
+        res.status(200).json({
             msg:"saved successfully",
             resource
         })

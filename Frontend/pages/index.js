@@ -13,14 +13,11 @@ export default function Home() {
             <Head>
                 <title>CodeStats</title>
                 <meta charSet="utf-8" />
-                <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
                 <meta name="theme-color" content="#000000" />
                 <meta
                     name="description"
                     content="A website For Competitive Coders"
                 />
-                <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-                <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                 <link
                     rel="stylesheet"
                     href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"

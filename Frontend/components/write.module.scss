@@ -115,3 +115,47 @@
         padding: 0;
     }
 }
+
+.overlay{
+    display:block;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.521);
+    z-index: 10;
+}
+.popup{
+    position: absolute;
+    top:40%;
+    left:40%;
+    width: 25%;
+    height: 15%;
+    min-width: 100px;   
+    text-align: center;
+    background-color: #85A3BF;
+    // display: flex;
+    // flex-direction: column;
+    padding-top: 5px;
+    border-radius: 18px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+    
+    .popup-text{
+        margin-top: 10px;
+        width: 100%;
+        min-height: 1rem;
+        font-size: 1.3rem;
+    }
+    .close-btn{
+        min-height: 35px;
+        width: 32%;
+        border-radius: 12px;
+        background-color: #507bf1;
+                
+    }
+}
+.hidden{
+    display: none;
+}

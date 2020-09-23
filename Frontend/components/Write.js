@@ -1,6 +1,7 @@
 import React, { Component, createRef } from "react";
 import dynamic from "next/dynamic";
 import style from "./write.module.scss";
+import Router from 'next/router'
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
     ssr: false,
@@ -99,6 +100,7 @@ export default class Write extends Component {
     }
     state = {
         url: "",
+        submitted: false,
         quillhtml:null,
         modules: {
             toolbar: [
@@ -188,7 +190,7 @@ export default class Write extends Component {
         this.setState({quillhtml:editor.getHTML()});
     }
 
-    sendFetch = () => {
+    submitWrite = () => {
         let localval = localStorage.getItem("jwt");
 
         if (localval) {
@@ -207,11 +209,25 @@ export default class Write extends Component {
                         body:this.state.quillhtml,
                         category:taglist
                     }),
+                })
+                .then(data=>{
+                    console.log("Data sent",data.status);
+                    if(!(data.status === 200 || data.status === 201)){
+                        data.json().then(res=>console.log(res));
+                    }
+                    else{
+                        this.setState({submitted:true});
+                    }
+                }).catch(err=>{
+                    console.log("Error Sending Data.");
                 });
             }
         }
     }
-
+    nextPage = ()=>{
+        this.setState()
+        Router.push(this.props.nextPage);
+    }
     render() {
         return (
             <>
@@ -224,6 +240,12 @@ export default class Write extends Component {
                     <label> Tags : </label>
                     <InputTag />
                 </div>
+                <div className={`${this.state.submitted ? style.overlay : style.hidden}`}>
+                    <div className={`${this.state.submitted ? style.popup : style.hidden}`}>
+                        <p className={style["popup-text"]}>Created New {this.props.name}</p> 
+                        <button className={style["close-btn"]} onClick={this.nextPage}>Close</button>
+                    </div>
+                </div>
                 <div className={style.content}>
                     <div className={style.editor}>
                         <QuillNoSSRWrapper
@@ -234,7 +256,7 @@ export default class Write extends Component {
                         />
                     </div>
                     <div className={style.bottom}>
-                        <button className="btn btn-success mb-3" onClick={this.sendFetch}>Submit</button>
+                        <button className="btn btn-success mb-3" onClick={this.submitWrite}>Submit</button>
                     </div>
                 </div>
             </>

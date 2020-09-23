@@ -11,19 +11,19 @@ const {getResourceById,createResources,deleteResources,updateResource,getAllReso
 router.param("userId",getUserById)
 
 //creating resource
-router.post("/resource/create/:userId",[
+router.post("/:userId",[
     check("description","description must be filled").isLength({min:1}),
     check("link","link must be filled").isLength({min:1}),
     check("category","choose any one category").notEmpty()
 ],isSignedIn,isAuthenticated,isAdmin,createResources);
 
 //updating resource
-router.put("/resource/update/:userId/:id",isSignedIn,isAuthenticated,isAdmin,updateResource)
+router.put("/:userId/:id",isSignedIn,isAuthenticated,isAdmin,updateResource)
 //deleting resource
-router.delete("/resource/delete/:userId/:id",isSignedIn,isAuthenticated,isAdmin,deleteResources)
+router.delete("/:userId/:id",isSignedIn,isAuthenticated,isAdmin,deleteResources)
 //geting the complete resource of a category
-router.get("/resources/:categoryId",getAllResource)
-router.get("/resources",getResources)
+router.get("/:categoryId",getAllResource)
+router.get("/",getResources)
 
 
 //getting the category and count

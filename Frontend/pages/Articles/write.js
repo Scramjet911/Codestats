@@ -34,10 +34,7 @@ export default function WriteArticle() {
                     <div className={styles.title}>
                         <div className="title">Write an article</div>
                     </div>
-                    
-                    
-                            <Write url={creatediscurl} />
-
+                        <Write url={creatediscurl} name="Article" nextPage="/Articles/Articles"/>
                 </div>
             </div>
         </Layout>

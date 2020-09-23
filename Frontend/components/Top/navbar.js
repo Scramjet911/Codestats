@@ -148,7 +148,7 @@ function Navbar() {
                     <Link href="/Events/events">
                         <a>Events</a>
                     </Link>
-                    <Link href="/resources/display">
+                    <Link href="/resources/category">
                         <a>Resources</a>
                     </Link>
                     <a className={styles.dropdown}>
@@ -162,7 +162,7 @@ function Navbar() {
                             </span>
                                 )}
                             <span>
-                                <Link href="/discussion/topdiscuss">
+                                <Link href="/discussion/top">
                                     <div>Top discussions</div>
                                 </Link>
                             </span>
@@ -173,7 +173,7 @@ function Navbar() {
                         <div className={styles.dropdown_content}>
                                 {isAuthenticated() && (
                             <span>
-                                    <Link href="/Articles/Write_article">
+                                    <Link href="/Articles/write">
                                         <div>Write article</div>
                                     </Link>
                             </span>

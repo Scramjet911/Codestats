@@ -9,7 +9,7 @@ function Profilearticle(props) {
   const readmore=(event)=>{
     event.preventDefault();
     const id=event.target.id
-    router.push(`/Articles/view_article?id=${id}`)
+    router.push(`/Articles/view?id=${id}`)
   }
   if(profile){
   console.log(profile.posts)
