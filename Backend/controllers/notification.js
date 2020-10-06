@@ -21,15 +21,16 @@ exports.getNotification = async (req,res)=>{
 /* Request should be like :
 {
     eventId,
-    date : (Date of Notification, send JSON.stringify(date) from client),
+    notif : [] array of dates,
 } */
 exports.queueNotification = (req, res, next)=>{
-    let notifBody = req.body;
-    let notifTime = new Date(notifBody.date);
-
-    notifBody.userId = req.params.userId;
-    if(notifTime >= Date.now())
-        req.app.agenda.schedule(notifTime,'sendNotification',notifBody);
+    if(Object.prototype.hasOwnProperty.call(req.body,"notif")){
+        req.body.forEach(notif => {
+            let notifTime = new Date(notif);
+            if(notifTime >= Date.now())
+                req.app.agenda.schedule(notifTime, 'sendNotification', {userId:req.params.userId, eventId:req.body.eventId});    
+        });
+    }
     next();
 }
 

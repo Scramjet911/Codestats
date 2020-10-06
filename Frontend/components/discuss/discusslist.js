@@ -1,4 +1,5 @@
 import { withRouter } from "next/router";
+import style from './discusslist.module.css';
 const { Component } = require("react");
 
 let discussurl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/discussion/":"http://localhost:8000/api/discussion/";
@@ -17,7 +18,7 @@ class DiscussList extends Component{
         })
         .then(data=>data.json())
         .then(discussions=>{
-            if(discussions.hasOwnProperty("err")){
+            if(Object.prototype.hasOwnProperty.call(discussions,"err")){
                 console.log("Server Error");
                 return;
             }
@@ -36,13 +37,13 @@ class DiscussList extends Component{
     render(){
         let discussions = this.state.discusslist.map((d,i)=>{
             let categories = d.category.map((cat, j)=>
-                <p key={j} className="tags-discuss">{cat}</p>
+                <p key={j} className={style["tags-discuss"]}>{cat}</p>
             );
             return(
                 <div key={i}>
                     <div className="row">
                         <div className="col-7 pl-4 ">
-                            <p className="text-discuss" onClick={()=>this.openDiscuss(d)}>
+                            <p className={style["text-discuss"]} onClick={()=>this.openDiscuss(d)}>
                                 {d.title}
                             </p>
                             {categories}
@@ -50,9 +51,9 @@ class DiscussList extends Component{
                         <div className="col-3">
                             <img
                                 src="/images/avatar.png"
-                                className="image-discuss"
+                                className={style["image-discuss"]}
                             />
-                            <img
+                            {/* <img
                                 src="/images/loginImg.JPG"
                                 className="image-discuss"
                             />
@@ -63,7 +64,7 @@ class DiscussList extends Component{
                             <img
                                 src="/images/codechef.jpg"
                                 className="image-discuss"
-                            />
+                            /> */}
                         </div>
                         <div className="col-1">69</div>
                         <div className="col-1">3d</div>

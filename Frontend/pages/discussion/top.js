@@ -2,14 +2,13 @@ import Head from "next/head";
 import dynamic from 'next/dynamic';
 const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
 import DiscussList from '../../components/discuss/discusslist'
+import style from './discuss.module.css';
 
 function Topdiscuss() {
     return (
         <div>
             <Head>
                 <title>Discuss</title>
-                <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-                <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                 <link
                     rel="stylesheet"
                     href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -25,27 +24,27 @@ function Topdiscuss() {
             </Head>
             <Navbar />
             <div>
-                <div className="search-d">
+                <div className={style["search-d"]}>
                     <input type="text" placeholder="Search...." />
                 </div>
-                <div className="search-discuss">
+                <div className={style["search-discuss"]}>
                     <button type="submit" className="search-btn">
                         <i className="fa fa-search"></i>
                     </button>
                 </div>
             </div>
             <div>
-                <h1 className="title-discuss">Top discussions</h1>
+                <h1 className={style["title-discuss"]}>Top discussions</h1>
             </div>
 
             <div className="container">
                 <div className="row">
-                    <div className="col-7 mtopdiscuss pl-4">
+                    <div className={`col-7 ${style.mtopdiscuss} pl-4`}>
                         <h1>TOPIC</h1>
                     </div>
-                    <div className="col-3 mtopdiscuss"></div>
-                    <div className="col-1 mtopdiscuss">Replies</div>
-                    <div className="col-1 mtopdiscuss">Activity</div>
+                    <div className={`col-3 ${style.mtopdiscuss}`}></div>
+                    <div className={`col-1 ${style.mtopdiscuss}`}>Replies</div>
+                    <div className={`col-1 ${style.mtopdiscuss}`}>Activity</div>
                 </div>
                 <hr className="hr-original" />
                 <DiscussList />

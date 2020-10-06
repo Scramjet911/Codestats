@@ -5,6 +5,7 @@ import Resourceitem from "../../components/resources/resourceitem.js";
 import Categorysidecard from "../../components/resources/categorysidecard.js";
 import { Component } from "react";
 import {withRouter} from "next/router";
+import style from "./resource.module.scss";
 
 const resourceurl =
     process.env.NODE_ENV === "production"
@@ -67,7 +68,7 @@ class Resourceslist extends Component {
                     <Navbar />
                 </div>
                 <div>
-                    <h1 className="title-resource ">{this.state.title}</h1>
+                    <h1 className={style["title-resource"]}>{this.state.title}</h1>
                 </div>
                 <div className="container">
                     <div className="row">

@@ -10,7 +10,9 @@
     "build": "cd Frontend && next build",
     "heroku-postbuild": "cd Frontend && next build",
     "front": "cd Frontend && next start -p 8000",
-    "front-dev": "cd Frontend && next dev -p 8000"
+    "front-dev": "cd Frontend && next dev -p 8000",
+    "test": "cd Backend && mocha ./test/test.js --timeout 20000",
+    "test-dev": "cd Backend && mocha ./test/test.js --watch --timeout 20000"
   },
   "repository": {
     "type": "git",
@@ -31,12 +33,14 @@
     "bootstrap": "^4.5.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dompurify": "^2.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "express-validator": "^6.6.1",
     "formidable": "^1.2.2",
     "http": "0.0.1-security",
+    "jsdom": "^16.4.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
@@ -59,5 +63,12 @@
     "socketio-jwt": "^4.6.2",
     "uuid": "^8.3.0",
     "web-push": "^3.4.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.9.0",
+    "mocha": "^8.1.3",
+    "sinon": "^9.0.3"
   }
 }

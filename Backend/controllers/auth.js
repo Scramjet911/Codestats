@@ -134,7 +134,7 @@ exports.signup = (req,res)=>{
 // Email verification
 exports.confirmationPost=(req,res)=>{
     try {
-        token=req.params.token;
+        let token=req.params.token;
         jwt.verify(token, process.env.EMAIL_SECRET,(err, decoded) =>{
             if(err){
                 console.log(err,decoded);
@@ -197,7 +197,7 @@ exports.signin = (req,res)=>{
 
         // Send response to the front end
         const {_id,username,name,email,role}=user;
-        return res.json({token,user:{ _id,username,name,email,role} });
+        return res.status(200).json({token,user:{ _id,username,name,email,role} });
     });
 };
 
@@ -250,7 +250,7 @@ exports.forgotpassword=(req,res)=>{
                     subject: 'Create new password',
                     text: `Hello,\n\n' + 'to create new password please click:${url} ` 
                     };
-                transporter.sendMail(mailOptions,(err,data)=> {
+                transporter.sendMail(mailOptions,(err)=> {
                     if (err) 
                         { 
                             return res.status(500).send({ msg: err.message });
@@ -269,8 +269,8 @@ exports.forgotpassword=(req,res)=>{
 exports.createPassword = (req,res)=>{
         
     try {
-        token=req.params.token;
-        password=req.body.password;
+        let token=req.params.token;
+        let password=req.body.password;
         jwt.verify(token, process.env.FORGET_SECRET,(err, decoded) =>{
             if(err){
                 return res.status(400).json({
@@ -333,6 +333,3 @@ exports.isAdmin=(req,res,next)=>{
     }
     next();
 }
-
-
-//https://localhost:8000/confirmation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjVjYWM0ZjVjOWZkODBjYjg0MDlmYTAiLCJpYXQiOjE1OTk5MDg5NDMsImV4cCI6MTU5OTkxMjU0M30.uvGAE8nAijSwxkESd1P--sHsod1-eIqTT0LgY3FUKX8

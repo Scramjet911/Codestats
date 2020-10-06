@@ -153,8 +153,18 @@
 .question > label {
     color: khaki;
 }
-.title {
+/* .title {
     text-align: center;
+} */
+.title {
+    top: 0px;
+    color: rgb(255, 242, 242);
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
 }
 .bottom {
     width: 98.5%;
@@ -165,4 +175,61 @@
 .bottom > button {
     width: 100%;
     height: 40px;
+}
+
+.mtopdiscuss {
+    margin-top: 30px;
+}
+.image-discuss {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    display: inline-block;
+}
+.tags-discuss {
+    position: relative;
+    top: -10px;
+    font-size: 12px;
+    border-style: ridge;
+    border-radius: 5px;
+    border-width: thin;
+    display: inline;
+    margin-left: 5px;
+    padding: 2px;
+}
+.text-discuss {
+    font-size: 18px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
+        sans-serif;
+    font-weight: lighter;
+}
+.search-discuss {
+    margin-left: 589px;
+    position: relative;
+    top: -49px;
+}
+.search-d input[type="text"] {
+    text-align: left;
+    margin-left: 150px;
+    margin-top: 10px;
+    padding: 16px;
+    background: none;
+    border-style: double;
+    font-size: 17px;
+    border-radius: 25px;
+    border-color: rgb(7, 15, 31);
+    width: 500px;
+    height: 50px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    color: rgb(15, 153, 158);
+}
+.title-discuss {
+    text-align: center;
+    color: rgb(247, 248, 255);
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    top: 100px;
 }

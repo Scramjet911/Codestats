@@ -1,30 +1,20 @@
 import React from "react";
 import Login from "./login";
 import Register from "./register";
+import style from './login.module.css'
+import Modal from "react-modal";
 
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLogginActive: true,
+            isLogginActive: props.issignin
         };
     }
-
-    componentDidMount() {
-        //Add .right by default
-        this.rightSide.classList.add("left");
+    componentDidMount(){
+        this.setState({isOpen:this.props.isOpen});
     }
-
     changeState() {
-        const { isLogginActive } = this.state;
-
-        if (isLogginActive) {
-            this.rightSide.classList.remove("left");
-            this.rightSide.classList.add("right");
-        } else {
-            this.rightSide.classList.remove("right");
-            this.rightSide.classList.add("left");
-        }
         this.setState((prevState) => ({
             isLogginActive: !prevState.isLogginActive,
         }));
@@ -32,11 +22,18 @@ class SignIn extends React.Component {
 
     render() {
         const { isLogginActive } = this.state;
-        const current = isLogginActive ? "Sign Up" : "Sign In";
-        const currentActive = isLogginActive ? "Sign In" : "Sign Up";
+        // const current = isLogginActive ? "Sign Up" : "Sign In";
+        // const currentActive = isLogginActive ? "Sign In" : "Sign Up";
         return (
-            <div>
-                <div id="center" ref={(ref) => (this.container = ref)}>
+            <div className={style["wrapper"]}>
+                <ul className={style["switch"]}>
+                    <li className={this.state.isLogginActive? "" : style["switch-disable"]}>
+                        <a onClick={()=>this.setState({isLogginActive:true})}>Sign in</a>
+                    </li>
+                    <li className={this.state.isLogginActive?style["switch-disable"]:""}>
+                        <a onClick={()=>this.setState({isLogginActive:false})}>New account</a>
+                    </li>
+			    </ul>
                     {isLogginActive && (
                         <Login containerRef={(ref) => (this.current = ref)} />
                     )}
@@ -45,16 +42,16 @@ class SignIn extends React.Component {
                             containerRef={(ref) => (this.current = ref)}
                         />
                     )}
-                </div>
-
-                <div className="switch">
-                    <RightSide
+                
+                {/* <div className={style.switch}> */}
+                    {/* <RightSide
                         current={current}
                         currentActive={currentActive}
                         containerRef={(ref) => (this.rightSide = ref)}
                         onClick={this.changeState.bind(this)}
-                    />
-                </div>
+                        className={`${this.state.isLogginActive? style["right"] : style["left"]}`}
+                    /> */}
+                {/* </div> */}
             </div>
         );
     }
@@ -63,12 +60,12 @@ class SignIn extends React.Component {
 const RightSide = (props) => {
     return (
         <div
-            className="right-side"
+            className={props.className}
             ref={props.containerRef}
             onClick={props.onClick}
         >
-            <div className="inner-container">
-                <div className="text">{props.current}</div>
+            <div className={style["inner-container"]}>
+                <div className={style["text"]}>{props.current}</div>
             </div>
         </div>
     );

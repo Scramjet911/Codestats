@@ -8,8 +8,8 @@ import LikeButton from "../../components/like";
 
 const creatediscurl =
     process.env.NODE_ENV === "production"
-        ? "//codestats-test.herokuapp.com/api/discussion/create/"
-        : "http://localhost:8000/api/discussion/create/";
+        ? "//codestats-test.herokuapp.com/api/discussion/"
+        : "http://localhost:8000/api/discussion/";
 
 export default function CreateDisc() {
     return (

@@ -5,7 +5,7 @@ const { check} = require('express-validator');
 
 const {isSignedIn,isAuthenticated,isAdmin} = require("../controllers/auth");
 const {getUserById}=require("../controllers/user")
-const {getResourceById,createResources,deleteResources,updateResource,getAllResource,getResources} = require("../controllers/resources")
+const {createResources,deleteResources,updateResource,getAllResource,getResources} = require("../controllers/resources")
 
 
 router.param("userId",getUserById)

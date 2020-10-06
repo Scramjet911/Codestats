@@ -1,14 +1,12 @@
-import Link from "next/link";
+import style from "./resource.module.css";
 
 function Resourceitem(props) {
-  return (
-    <div>
-      <div className="resource-item">
-        <a className="text-link" href={props.goto}>
-          {props.content}
-        </a>
-      </div>
-    </div>
-  );
+    return (
+            <div className={style["resource-item"]}>
+                <a className={style["text-link"]} href={props.goto}>
+                    {props.content}
+                </a>
+            </div>
+    );
 }
 export default Resourceitem;

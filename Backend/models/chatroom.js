@@ -20,6 +20,6 @@ const chatRoomSchema = new mongoose.Schema({
 });
 
 chatRoomSchema.index({user1:1,user2:1});
-chatRoomSchema.index({user2:1,user1:1});
+chatRoomSchema.index({user2:1});
 
 module.exports = mongoose.model('Chatrooms',chatRoomSchema);

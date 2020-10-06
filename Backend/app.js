@@ -38,6 +38,9 @@ webpush.setVapidDetails(
 );
 
 // Database connection
+if(process.env.NODE_ENV === 'test'){
+    process.env.DATABASE = process.env.Test_Database;
+}
 mongoose.connect(process.env.DATABASE, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -118,6 +121,9 @@ nextapp.prepare().then(() => {
 
 const port = process.env.PORT || 8000;
 
-http.listen(port, () => {
+let server = http.listen(port, () => {
     console.log(`http :${port}`);
+    http.emit('appstarted');
 });
+
+module.exports = {app:http, server:server};

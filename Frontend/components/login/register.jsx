@@ -1,4 +1,5 @@
 import React, {createRef} from "react";
+import style from "./login.module.css";
 
 const signupurl = (process.env.NODE_ENV==="production")?"//codestats-test.herokuapp.com/api/signup/":"http://localhost:8000/api/signup/";
 
@@ -68,11 +69,11 @@ export default class Register extends React.Component {
 
     render() {
         return (
-            <div className="auth-wrapper" ref={this.props.containerRef}>
+            <div className={style["auth-wrapper"]} ref={this.props.containerRef}>
                 {this.alertMessage()}
-                <div className="auth-inner">
+                <div className={style["auth-inner"]}>
                     <form onSubmit={this.signup}>
-                        <h3 className="title">Sign Up</h3>
+                        {/* <h3 className="title">Sign Up</h3> */}
 
                         <label className="form-label"> Name</label>
                         <input

@@ -1,0 +1,28 @@
+.resource-item {
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-radius: 3px;
+    border-bottom-width: thin;
+    padding: 15px;
+}
+.resource-item:hover {
+    background: rgb(3, 1, 40);
+    background: linear-gradient(
+        74deg,
+        rgba(3, 1, 40, 1) 2%,
+        rgba(8, 36, 83, 1) 39%,
+        rgba(11, 65, 106, 1) 78%,
+        rgba(2, 74, 89, 1) 100%
+    );
+    color: black;
+}
+.text-link {
+    text-decoration: none;
+    word-wrap: break-word;
+    color: white;
+    font-size: 20px;
+}
+.text-link:hover {
+    text-decoration: none;
+    color: #dae0e2;
+}

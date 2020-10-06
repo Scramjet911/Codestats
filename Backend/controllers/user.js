@@ -146,7 +146,7 @@ exports.unfollow=(req,res)=>{
 exports.getSavedEvents = (req, res)=>{
     User.findById(req.params.userId, async (err,user)=>{
         if(err){
-            res.status(500).send("Server Error");
+            res.status(500).json({err:"Server Error"});
             return;
         }
         try{
@@ -161,21 +161,21 @@ exports.getSavedEvents = (req, res)=>{
         }
         catch(error){
             console.log("Server Error",error);
-            res.status(500).send("Server Error");
+            res.status(500).json({err:"Server Error"});
         }
     });
 }
 
 /* Request needs only EventId */
 exports.saveEvent = (req, res)=>{
-    User.findByIdAndUpdate(req.params.userId,{$addToSet : {savedEvents:req.body.eventId}},(err,doc)=>{
+    User.findByIdAndUpdate(req.params.userId,{$addToSet : {savedEvents:req.body.eventId}},(err)=>{
         if(err){
             console.log("Unable to Add to Saved Events",err);
-            res.status(500).send("Server Error");
+            res.status(500).json({err:"Server Error"});
         }
         else{
             // console.log("Saved Event",doc);
-            res.status(201).send("Success");
+            res.status(201).json({message:"Success"});
         }
     });
 }
@@ -185,11 +185,11 @@ exports.deleteSavedEvent = (req, res)=>{
     User.findByIdAndUpdate(req.params.userId,{$pull : {savedEvents:req.body.eventId}},(err,doc)=>{
         if(err){
             console.log("Unable to Delete Saved Events",err);
-            res.status(500).send("Server Error");
+            res.status(500).json({err:"Server Error"});
         }
         else{
             console.log("Deleted Saved Event",doc);
-            res.status(201).send("Success");
+            res.status(201).json({message:"Succes"});
         }
     });
 }

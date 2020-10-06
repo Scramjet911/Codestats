@@ -2,6 +2,7 @@ import React from "react";
 import Router, { useRouter } from "next/router";
 import { useState } from "react";
 import {hideLogin} from '../Top/navbar'
+import style from "./login.module.css"
 
 import { login, authenticate, isAuthenticated } from "../auth/index";
 
@@ -113,15 +114,15 @@ function Login(props) {
 	};
 
 	return (
-		<div>
-			<div className="auth-wrapper" ref={props.containerRef}>
+		<>
+			<div className={style["auth-wrapper"]} ref={props.containerRef}>
 				{succesmessage()}
 				{errormessage()}
-				<div className="auth-inner">
+				<div className={style["auth-inner"]}>
 					{values.isActive ? (
 						<div>
 							<form onSubmit={onSubmit}>
-								<h3 className="title">Log In</h3>
+								{/* <h3 className="title">Log In</h3> */}
 								<div className="form-group"></div>
 								<div className="login-input-pos">
 									<div className="form-group">
@@ -193,7 +194,7 @@ function Login(props) {
 					)}
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 export default Login;

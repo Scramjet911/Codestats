@@ -66,7 +66,7 @@ exports.createResources = (req,res) =>{
         const cat=resource.category;
         console.log(cat)
         cat.forEach(item => {
-            Category.findOneAndUpdate({name:item}, {$inc:{resourceCount:1}, $setOnInsert:{name:item}}, {upsert:true}, (err,category)=>{
+            Category.findOneAndUpdate({name:item}, {$inc:{resourceCount:1}, $setOnInsert:{name:item}}, {upsert:true}, (err)=>{
                 if(err){
                     return res.status(400).json({
                         error:"Error occured choosing this category"

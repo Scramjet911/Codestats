@@ -3,7 +3,6 @@ const Chats = require('../models/chats');
 const User = require('../models/user');
 const socketjwt = require('socketio-jwt');
 const mongoose = require('mongoose');
-const chatroom = require('../models/chatroom');
 
 const MaxChatMsg = 100;
 

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import EventList from "../../components/Event/revieweventlist"
 
 import dynamic from 'next/dynamic';
 const Navbar = dynamic(import("../../components/Top/navbar"),{ssr:false});
@@ -10,8 +11,6 @@ function Adminpanel() {
         <div>
             <Head>
                 <title>Admin Panel</title>
-                <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-                <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                 <link
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -66,37 +65,8 @@ function Adminpanel() {
                                 <div className="col-2"></div>
                             </div>
                             <hr className="hr-original" />
-
-                            <div className="row">
-                                <div className="col-7">
-                                    <h3>GEC Summer of Code</h3>
-                                    <p>
-                                        <a>www.hackerrank.com/asasasaasa</a>
-                                    </p>
-                                </div>
-                                <div className="col-3">
-                                    <p>DD-MM-YY HH:MM To</p>
-                                    <p>DD-MM-YY HH:MM</p>
-                                </div>
-                                <div className="col-2">
-                                    <button
-                                        className="btn-sm btn-outline-light "
-                                        href="#"
-                                        role="button"
-                                    >
-                                        Approve
-                                    </button>
-                                    <button
-                                        className="btn-sm btn-outline-danger "
-                                        href="#"
-                                        role="button"
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                            <hr />
-                            <div className="row">
+                            <EventList/>
+                            {/* <div className="row">
                                 <div className="col-7">
                                     <h3>Code wars NITC</h3>
                                     <p>
@@ -153,7 +123,7 @@ function Adminpanel() {
                                     </button>
                                 </div>
                             </div>
-                            <hr />
+                            <hr /> */}
                         </div>
                     </div>
                 </div>

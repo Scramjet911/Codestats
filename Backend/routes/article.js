@@ -3,7 +3,7 @@ var router = express.Router();
 const { check} = require('express-validator');
 
 
-const {isSignedIn,isAuthenticated,isAdmin} = require("../controllers/auth");
+const {isSignedIn,isAuthenticated} = require("../controllers/auth");
 const {getUserById} = require("../controllers/user");
 const {createArticle,uploadImage,getArticleById,updateArticle,getAllArticle,savingArticle,like,unlike,createComment, deleteComment,getCommentById, updateComment, getAllcomment,deleteArticle, deletesavingArticle, getOneArticle}= require("../controllers/article")
 

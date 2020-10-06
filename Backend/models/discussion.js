@@ -1,5 +1,9 @@
 const mongoose =require('mongoose');
 const {ObjectId}=mongoose.Schema;
+const Dompurify = require('dompurify');
+const {JSDOM} = require('jsdom');
+const dompurify = Dompurify(new JSDOM().window);
+
 const discussionSchema = new mongoose.Schema({
     title:{
         type:String,
@@ -30,5 +34,12 @@ const discussionSchema = new mongoose.Schema({
 
 },
 {timestamps:true});
+
+discussionSchema.pre('validate', (next)=>{
+    if(this.body){
+        this.body = dompurify.sanitize(this.body);
+    }
+    next();
+})
 
 module.exports = mongoose.model("Discussion",discussionSchema);

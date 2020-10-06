@@ -62,7 +62,7 @@ exports.createDiscussion = (req,res)=>{
                 })
             }
         })
-        res.json(discussion);
+        res.status(201).json(discussion);
         
     })
 }
@@ -84,7 +84,7 @@ exports.updateDiscussion= (req,res)=>{
                 });
 
             }
-            res.json(discussion);
+            res.status(201).json(discussion);
         }
     )
 }
@@ -97,7 +97,7 @@ exports.getAllDiscussion = (req,res)=>{
                 err:"can not get all discussion"
             })
         }
-        res.json(discussion)
+        res.status(201).json(discussion)
     })
 
 }
@@ -155,7 +155,7 @@ exports.deleteDiscussion= (req,res)=>{
                     error:"can not delete this discussion"
                 })
             }
-            res.status(400).json({
+            res.status(201).json({
                 msg:"discussion deleted successfully",
                 authorname:user._id,
                 disc:disc.author
@@ -166,9 +166,9 @@ exports.deleteDiscussion= (req,res)=>{
     }
     else{
         return res.status(400).json({
-            msg:"canot delete article ,you are not author" ,
+            msg:"Cannot delete article, you are not author" ,
                 authorname:user._id,
-                disc:disc.author
+                disc:discussion.author
         })
     }
     
@@ -210,7 +210,7 @@ exports.createComment = (req,res)=>{
     })
 }
 exports.updateComment= (req,res)=>{
-    comment =req.comment;
+    let comment =req.comment;
     comment.body = req.body.body;
     comment.save((err)=>{
         if(err){
@@ -229,7 +229,7 @@ exports.updateComment= (req,res)=>{
 
 }
 exports.deleteComment= (req,res)=>{
-    id=req.comment._id
+    let id=req.comment._id
     let user =req.profile;
     let discussion = req.discussion;
     Comments.findById(id,(err,comment)=>{

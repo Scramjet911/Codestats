@@ -28,7 +28,7 @@ exports.createCategory = (req,res)=>{
 
 exports.getCategory = (req,res)=>{
     return res.json(req.category);
-;}
+}
 
 exports.getAllCategory=(req,res)=>{
     Category.find().exec((err,categories)=>{
@@ -58,7 +58,7 @@ exports.upadateCategory = (req,res)=>{
 exports.removeCategory = (req,res) =>{
     const category = req.category;
 
-    category.remove((err,category)=>{
+    category.remove((err)=>{
         if(err){
             return res.status(400).json({
                 error:"failed to remove category"

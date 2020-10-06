@@ -1,6 +1,5 @@
 import Head from "next/head";
 import {useRouter} from "next/router"
-import dynamic from 'next/dynamic'
 import styles from "./nav.module.css";
 import React, { useState } from "react";
 // import HamburgerMenu from "react-hamburger-menu";
@@ -8,7 +7,6 @@ import React, { useState } from "react";
 import { signout, isAuthenticated } from "../auth/index";
 import Clock from "react-live-clock";
 import SignIn from "../login/signin";
-import SignUp from "../login/signup";
 import Link from "next/link";
 import Modal from "react-modal";
 
@@ -42,8 +40,8 @@ function Navbar() {
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
                 />
             </Head>
-            <div className="top2">
-                <div className="name logo">CodeStats</div>
+            <div className={styles["top2"]}>
+                <div className={`${styles.name} ${styles.logo}`}>CodeStats</div>
                 <div className={styles.clock}>
                     <Clock
                         format={"HH:mm:ss"}
@@ -52,7 +50,7 @@ function Navbar() {
                     />
                 </div>
                 
-                <div className={classname} id="myTopnav">
+                <div className={styles["topnav"]} id="myTopnav">
                     {isAuthenticated() && (
                         <div>
                             <a
@@ -83,46 +81,20 @@ function Navbar() {
                             </a>
 
                             <Modal
-                                id="center"
                                 isOpen={modal1IsOpen}
                                 onRequestClose={() => setModal1IsOpen(false)}
-                                style={{
-                                    overlay: { background: "rgba(0, 0, 0, 0.75)" },
-                                    content: {
-                                        background: "black",
-                                        width: "450px",
-                                        top: "70px",
-                                        height: "auto",
-                                        borderStyle: "none",
-                                        overflow: "hidden",
-                                        opacity: "1",
-                                        borderRadius: "15px",
-                                        padding: "0px",
-                                    },
-                                }}
+                                overlayClassName={styles["modal-overlay"]}
+                                className={styles["modal-content"]}
                             >
-                                <SignIn />
+                            <SignIn issignin={true}/>
                             </Modal>
                             <Modal
-                                id="center"
                                 isOpen={modal2IsOpen}
                                 onRequestClose={() => setModal2IsOpen(false)}
-                                style={{
-                                    overlay: { background: "rgba(0, 0, 0, 0.75)" },
-                                    content: {
-                                        background: "black",
-                                        width: "450px",
-                                        top: "50px",
-                                        height: "auto",
-                                        borderStyle: "none",
-                                        overflow: "hidden",
-                                        opacity: "1",
-                                        borderRadius: "15px",
-                                        padding: "0px",
-                                    },
-                                }}
+                                overlayClassName={styles["modal-overlay"]}
+                                className={styles["modal-content"]}
                             >
-                                <SignUp />
+                            <SignIn issignin={false}/>
                             </Modal>
                             <a
                                 onClick={() => setModal2IsOpen(true)}

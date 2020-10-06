@@ -1,7 +1,7 @@
 const express = require("express");
 var router = express.Router();
-const { check ,validationResult, oneOf} = require('express-validator');
-const{signout,signup,signin,isSignedIn,confirmationPost,forgotpassword, createPassword}=require('../controllers/auth');
+const { check } = require('express-validator');
+const{signout,signup,signin,confirmationPost,forgotpassword, createPassword}=require('../controllers/auth');
 
 router.post("/signup",[
     check("username","username should be 3 characters")

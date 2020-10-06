@@ -1,0 +1,23 @@
+.image-discuss {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    display: inline-block;
+}
+.tags-discuss {
+    position: relative;
+    top: -10px;
+    font-size: 12px;
+    border-style: ridge;
+    border-radius: 5px;
+    border-width: thin;
+    display: inline;
+    margin-left: 5px;
+    padding: 2px;
+}
+.text-discuss {
+    font-size: 18px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
+        sans-serif;
+    font-weight: lighter;
+}

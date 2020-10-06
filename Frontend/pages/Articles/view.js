@@ -108,8 +108,6 @@ export default function ViewArticle() {
         <div>
             <Head>
                 <title>View article</title>
-                <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-                <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                 <link
                     rel="stylesheet"
                     href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"

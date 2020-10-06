@@ -6,8 +6,6 @@ const _ =require("lodash");
 const fs =require('fs');
 const path =require("path");
 const {validationResult} = require('express-validator');
-const { forEach } = require("lodash");
-const { Mongoose } = require("mongoose");
 
 
 exports.getArticleById = (req,res,next,id) =>{
@@ -137,7 +135,7 @@ exports.deleteArticle = (req,res)=>{
                 })
             }
         })
-        article.remove((err,art)=>{
+        article.remove((err)=>{
             if(err){
                 return res.status(400).json({
                     error:"can not delete this article"
@@ -344,7 +342,7 @@ exports.createComment = (req,res)=>{
 }
 
 exports.deleteComment= (req,res)=>{
-    id=req.params.id;
+    let id=req.params.id;
     let user =req.profile;
     let article = req.article;
     Comment.findById(id,(err,comment)=>{
@@ -377,7 +375,7 @@ exports.deleteComment= (req,res)=>{
 //      "body":"comment"
 //  }
 exports.updateComment= (req,res)=>{
-        comment =req.comment;
+        let comment =req.comment;
         comment.body = req.body.body;
         comment.save((err)=>{
             if(err){

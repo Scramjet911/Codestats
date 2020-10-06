@@ -96,11 +96,6 @@ class ViewDiscussion extends Component {
                 <Head>
                     <title>Discussion</title>
                     <link
-                        rel="apple-touch-icon"
-                        href="%PUBLIC_URL%/logo192.png"
-                    />
-                    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-                    <link
                         rel="stylesheet"
                         href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
                         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
@@ -131,14 +126,14 @@ class ViewDiscussion extends Component {
                                     "MMMM Do YYYY"
                                 )}
                             </div>
-                            <div className="title">
+                            <div className={styles["title"]}>
                                 {this.state.discuss.title}
                             </div>
                             <div className={styles.details}>
                                 {this.state.discuss.category.map((cat, index) => (
                                     <div
                                         key={index}
-                                        className="tags-discuss"
+                                        className={styles["tags-discuss"]}
                                     >
                                         {cat}
                                     </div>
